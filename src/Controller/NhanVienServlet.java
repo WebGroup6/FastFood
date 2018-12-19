@@ -102,7 +102,7 @@ public class NhanVienServlet extends HttpServlet {
 
 		nvDAO.insertNV(nv);
 		System.out.println("loi");
-		response.sendRedirect("/Version3/NhanVienServlet");
+		response.sendRedirect("/FastFood/NhanVienServlet");
 
 	}
 	

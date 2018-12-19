@@ -185,10 +185,10 @@
 							</c:forEach>
 						</table>
 					</div>
-					<ul class="pager">
+					<!-- <ul class="pager">
 						<li class="previous"><a href="#">Previous</a></li>
 						<li class="next"><a href="#">Next</a></li>
-					</ul>
+					</ul> -->
 
 
 					<div class="container">

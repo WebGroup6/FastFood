@@ -12,18 +12,19 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<!--lấy mỗi cái nút search-->
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
-<!-- Custom styles for this template -->
+
 <c:if test="${tinKhuyenMai == null }">
 	<link rel="stylesheet" href="./css/CSS.css">
 </c:if>
@@ -97,15 +98,13 @@
 				<div class="col-sm-3 col-md-2 sidebar">
 					<!--left bar-->
 					<ul class="nav nav-sidebar">
-						<li><a href="AdminThongKe.jsp">Thống Kê</a></li>
-						<li><a href="AdminQLKH.jsp">Khách hàng</a></li>
-						<li><a href="AdminQLNV.jsp">Nhân viên</a></li>
-						<li><a href="AdminLoaisp.jsp">Loại Sản phẩm</a></li>
-						<li><a href="AdminQLSP.jsp">Sản phẩm</a></li>
-
-						<li><a href="AdminQLHD.jsp">Đơn hàng</a></li>
-
-						<li><a href="AdminTinKM.jsp">Tin khuyến mãi</a></li>
+						<li><a href="">Thống Kê</a></li>
+						<li><a href="KhachHangServlet">Khách hàng</a></li>
+						<li><a href="NhanVienServlet">Nhân viên</a></li>
+						<li><a href="LoaiSPServlet">Loại sản phẩm</a></li>
+						<li><a href="SanPhamServlet">Sản phẩm</a></li>
+						<li><a href="HoaDonServlet">Đơn hàng</a></li>
+						<li><a href="TinKMServlet">Tin khuyến mãi</a></li>
 					</ul>
 				</div>
 
@@ -115,7 +114,7 @@
 					<div class="QLSP">
 						<h1>Quản lý tin khuyến mãi</h1>
 					</div>
-					<nav class="collapse navbar-collapse navbar-ex1-collapse">
+					<!-- <nav class="collapse navbar-collapse navbar-ex1-collapse">
 						<div class="breadcrumb">
 							<div class="topnav-right">
 								<div class="search-container">
@@ -140,7 +139,7 @@
 									khuyến mãi</button>
 							</div>
 						</div>
-					</nav>
+					</nav> -->
 
 
 					<div class="table-responsive">
@@ -162,18 +161,18 @@
 									<td><c:out value="${tinkm.tieuDe}" /></td>
 									<td><c:out value="${tinkm.noiDung}" /></td>
 									<td><img alt="Not found"
-										src="http://localhost:8080/Version4/LoadHinhTinKM?maTKM=${tinkm.getMaTKM() }"
+										src="http://localhost:8080/FastFood/LoadHinhTinKM?maTKM=${tinkm.getMaTKM() }"
 										width="100px" height="100px"></td>
 
 
 									<td width="75px"><a
-										href="/Version4/TinKMServlet/edit?maTKM=<c:out value="${tinkm.getMaTKM()}" />"
+										href="/FastFood/TinKMServlet/edit?maTKM=<c:out value="${tinkm.getMaTKM()}" />"
 										class="edit"> <span class="glyphicon glyphicon-edit"></span></a>
 										
 								
 										
 										<a
-										href="/Version4/TinKMServlet/delete?maTKM=<c:out value="${tinkm.getMaTKM()}" />"
+										href="/FastFood/TinKMServlet/delete?maTKM=<c:out value="${tinkm.getMaTKM()}" />"
 										class="delete"> <span
 											class="glyphicon glyphicon-remove-sign"></span>
 									</a></td>
@@ -197,11 +196,11 @@
 
 					<c:if test="${tinKhuyenMai == null }">
 						<form enctype="multipart/form-data" method="post"
-							action="/Version4/TinKMServlet/insert">
+							action="/FastFood/TinKMServlet/insert">
 					</c:if>
 					<c:if test="${tinKhuyenMai != null }">
 						<form enctype="multipart/form-data" method="post"
-							action="/Version4/TinKMServlet/update">
+							action="/FastFood/TinKMServlet/update">
 					</c:if>
 					<!-- The Modal THEM-->
 					<div class="modal fade" id="myModal">
@@ -286,11 +285,11 @@
 			</div>
 		</div>
 	</div>
-	<c:if test="${tinKhuyenMai != null }">
+	<%-- <c:if test="${tinKhuyenMai != null }">
 		<script type="text/javascript">
 			$('#myModal').modal('show');
 		</script>
-	</c:if>
+	</c:if> --%>
 
 	<!-- <script>
 		type = "text/javascript" > $.validator.setDefaults({
@@ -420,6 +419,14 @@
 		});
 	</script> -->
 
+
+	<c:if test="${tinKhuyenMai != null }">
+		<script type="text/javascript">
+			$('#myModal').modal('show');
+		</script>
+	</c:if>
+	
+	<!-- <div class="modal-backdrop fade in"></div> -->
 </body>
 
 </html>

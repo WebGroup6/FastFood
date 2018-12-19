@@ -1,6 +1,5 @@
 package DAO;
 
-
 import Model.TinKM;
 
 import java.sql.Connection;
@@ -15,85 +14,84 @@ import java.util.List;
 public class TinKMDAO {
 
 	private String jdbcURL;
-    private String jdbcUsername;
-    private String jdbcPassword;
-    private Connection jdbcConnection;
-     
+	private String jdbcUsername;
+	private String jdbcPassword;
+	private Connection jdbcConnection;
+
 //    public TinKMDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
 //        this.jdbcURL = jdbcURL;
 //        this.jdbcUsername = jdbcUsername;
 //        this.jdbcPassword = jdbcPassword;
 //    }
-     
-    public TinKMDAO(String jdbcURL) {
+
+	public TinKMDAO(String jdbcURL) {
 		this.jdbcURL = jdbcURL;
 	}
-    protected void connect() throws SQLException {
-        if (jdbcConnection == null || jdbcConnection.isClosed()) {
-            try {
-            	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            } catch (ClassNotFoundException e) {
-                throw new SQLException(e);
-            }
-            jdbcConnection = DriverManager.getConnection(
-                                        jdbcURL, jdbcUsername, jdbcPassword);
-           
-        }
-    }
-     
-    protected void disconnect() throws SQLException {
-        if (jdbcConnection != null && !jdbcConnection.isClosed()) {
-            jdbcConnection.close();
-        }
-    }
-    public boolean insertKM(TinKM km) throws SQLException {
-        String sql = "exec spro_TinKM_ThemTinKM ?,?,?,?";
-        connect();
-         
-        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setString(1,km.getMaTKM());
-        statement.setString(2, km.getTieuDe());
-        statement.setString(3, km.getNoiDung());
-        statement.setBlob(4, km.getHinhInput() );
-      
-        boolean rowInserted = statement.executeUpdate() > 0;
-        statement.close();
-       // disconnect();
-        return rowInserted;
-    }
-    
-    public List<TinKM> listAllKM() throws SQLException {
-        List<TinKM> listTKM = new ArrayList<>();
-         
-        String sql = "SELECT * FROM TIN_KM";
-         
-        connect();
-         
-        Statement statement = jdbcConnection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-        
-        while (resultSet.next()) {
-        	TinKM tin=new TinKM();
-        	tin.setMaTKM(resultSet.getString("MaTKM"));
-        	tin.setTieuDe(resultSet.getString("TieuDe"));
-        	tin.setNoiDung(resultSet.getString("NoiDung"));
-        	tin.setHinhBlob(resultSet.getBlob("HinhAnh"));
-       
-            listTKM.add(tin);
-            
-            
-        }
-         
-        resultSet.close();
-        statement.close();
-         
-        disconnect();
-         
-        return listTKM;
-    }
-    
-    
-    public String maTinKMCaoNhat() {
+
+	protected void connect() throws SQLException {
+		if (jdbcConnection == null || jdbcConnection.isClosed()) {
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			} catch (ClassNotFoundException e) {
+				throw new SQLException(e);
+			}
+			jdbcConnection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+
+		}
+	}
+
+	protected void disconnect() throws SQLException {
+		if (jdbcConnection != null && !jdbcConnection.isClosed()) {
+			jdbcConnection.close();
+		}
+	}
+
+	public boolean insertKM(TinKM km) throws SQLException {
+		String sql = "exec spro_TinKM_ThemTinKM ?,?,?,?";
+		connect();
+
+		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+		statement.setString(1, km.getMaTKM());
+		statement.setString(2, km.getTieuDe());
+		statement.setString(3, km.getNoiDung());
+		statement.setBlob(4, km.getHinhInput());
+
+		boolean rowInserted = statement.executeUpdate() > 0;
+		statement.close();
+		// disconnect();
+		return rowInserted;
+	}
+
+	public List<TinKM> listAllKM() throws SQLException {
+		List<TinKM> listTKM = new ArrayList<>();
+
+		String sql = "SELECT * FROM TIN_KM";
+
+		connect();
+
+		Statement statement = jdbcConnection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sql);
+
+		while (resultSet.next()) {
+			TinKM tin = new TinKM();
+			tin.setMaTKM(resultSet.getString("MaTKM"));
+			tin.setTieuDe(resultSet.getString("TieuDe"));
+			tin.setNoiDung(resultSet.getString("NoiDung"));
+			tin.setHinhBlob(resultSet.getBlob("HinhAnh"));
+
+			listTKM.add(tin);
+
+		}
+
+		resultSet.close();
+		statement.close();
+
+		disconnect();
+
+		return listTKM;
+	}
+
+	public String maTinKMCaoNhat() {
 
 		String re = "";
 		try {
@@ -128,70 +126,66 @@ public class TinKMDAO {
 		}
 		return re;
 	}
-    
-    
-     
-    public boolean deleteKM(String maTKM) throws SQLException {
-        String sql = "exec spro_TinKM_XoaTinKM  ?";
-        
-        connect();
-         
-        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setString(1,maTKM);
-         
-        boolean rowDeleted = statement.executeUpdate() > 0;
-        statement.close();
-        disconnect();
-        return rowDeleted;     
-    }
-     
-    
-    public boolean updateTinKM(TinKM km) throws SQLException {
-    	String sql = "UPDATE TIN_KM SET MaTKM = ?, TieuDe = ?, NoiDung = ?, HinhAnh =?";
+
+	public boolean deleteKM(String maTKM) throws SQLException {
+		String sql = "exec spro_TinKM_XoaTinKM  ?";
+
+		connect();
+
+		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+		statement.setString(1, maTKM);
+
+		boolean rowDeleted = statement.executeUpdate() > 0;
+		statement.close();
+		disconnect();
+		return rowDeleted;
+	}
+
+	public boolean updateTinKM(TinKM km) throws SQLException {
+		String sql = "UPDATE TIN_KM SET MaTKM = ?, TieuDe = ?, NoiDung = ?, HinhAnh =?";
 
 		sql += " WHERE MaTKM = ?";
-       
-        connect();
-         
-        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        
-        statement.setString(1,km.getMaTKM());
-        statement.setString(2, km.getTieuDe());
-        statement.setString(3, km.getNoiDung());
-        statement.setBlob(4, km.getHinhInput());
-        statement.setString(5, km.getMaTKM());
-      
-        boolean rowUpdated = statement.executeUpdate() > 0;
-        statement.close();
-        disconnect();
-        return rowUpdated;     
-    }
-     
-    public TinKM getTinKM(String MaTKM) throws SQLException {
-    	TinKM km = null;
-        String sql = "SELECT * FROM TIN_KM WHERE MaTKM = ?";
-         
-        connect();
-         
-        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setString(1, MaTKM);
-         
-        ResultSet resultSet = statement.executeQuery();
-         
-        if (resultSet.next()) {
-        	
-            
-            TinKM tin=new TinKM();
-        	tin.setMaTKM(resultSet.getString("MaTKM"));
-        	tin.setTieuDe(resultSet.getString("TieuDe"));
-        	tin.setNoiDung(resultSet.getString("NoiDung"));
-        	tin.setHinhBlob(resultSet.getBlob("HinhAnh"));
- 
-        }
-         
-        resultSet.close();
-        statement.close();
-         
-        return km;
-    }
+
+		connect();
+
+		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+
+		statement.setString(1, km.getMaTKM());
+		statement.setString(2, km.getTieuDe());
+		statement.setString(3, km.getNoiDung());
+		statement.setBlob(4, km.getHinhInput());
+		statement.setString(5, km.getMaTKM());
+
+		boolean rowUpdated = statement.executeUpdate() > 0;
+		statement.close();
+		disconnect();
+		return rowUpdated;
+	}
+
+	public TinKM getTinKM(String MaTKM) throws SQLException {
+
+		TinKM tin = new TinKM();
+		String sql = "SELECT * FROM TIN_KM WHERE MaTKM = ?";
+
+		connect();
+
+		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+		statement.setString(1, MaTKM);
+
+		ResultSet resultSet = statement.executeQuery();
+
+		if (resultSet.next()) {
+
+			tin.setMaTKM(resultSet.getString("MaTKM"));
+			tin.setTieuDe(resultSet.getString("TieuDe"));
+			tin.setNoiDung(resultSet.getString("NoiDung"));
+			tin.setHinhBlob(resultSet.getBlob("HinhAnh"));
+
+		}
+
+		resultSet.close();
+		statement.close();
+
+		return tin;
+	}
 }

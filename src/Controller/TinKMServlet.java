@@ -124,7 +124,7 @@ public class TinKMServlet extends HttpServlet {
 			e1.printStackTrace();
 		}
 		kmDAO.updateTinKM(tin);
-		response.sendRedirect("/Version4/TinKMServlet");
+		response.sendRedirect("/FastFood/TinKMServlet");
 
 	}
 
@@ -138,8 +138,10 @@ public class TinKMServlet extends HttpServlet {
 
 		TinKM tin = new TinKM();
 		tin = kmDAO.getTinKM(maTKM);
-
+		
 		request.setAttribute("tinKhuyenMai", tin);
+		
+		
 		request.getRequestDispatcher("/TinKMServlet").forward(request, response);
 
 	}
@@ -168,7 +170,7 @@ public class TinKMServlet extends HttpServlet {
 		}
 
 		kmDAO.insertKM(tin);
-		response.sendRedirect("/Version4/TinKMServlet");
+		response.sendRedirect("/FastFood/TinKMServlet");
 
 	}
 
@@ -197,7 +199,7 @@ public class TinKMServlet extends HttpServlet {
 		String maTKM = (request.getParameter("maTKM"));
 
 		kmDAO.deleteKM(maTKM);
-		response.sendRedirect("/Version4/TinKMServlet");
+		response.sendRedirect("/FastFood/TinKMServlet");
 
 	}
 
