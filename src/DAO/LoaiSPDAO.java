@@ -37,20 +37,7 @@ public class LoaiSPDAO {
 		}
 	}
 
-	public boolean insertLoaiSP(LoaiSP loaisp) throws SQLException {
-		String sql = "INSERT INTO loaisp (MaLoai,TenLoaiSP) VALUES (?, ?)";
-		connect();
-
-		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-		statement.setString(1, loaisp.getMaLoai());
-		statement.setString(2, loaisp.getTenLoaiSP());
-
-		boolean rowInserted = statement.executeUpdate() > 0;
-		statement.close();
-		disconnect();
-		return rowInserted;
-	}
-
+	// load danh sach loai san pham
 	public List<LoaiSP> listAllLoaiSP() throws SQLException {
 		List<LoaiSP> listLoaiSP = new ArrayList<>();
 
@@ -62,11 +49,17 @@ public class LoaiSPDAO {
 		ResultSet resultSet = statement.executeQuery(sql);
 
 		while (resultSet.next()) {
-			String maLoai = resultSet.getString("MaLoai");
-			String tenLoaiSP = resultSet.getString("TenLoaiSP");
+			LoaiSP lSP = new LoaiSP();
+			lSP.setMaLoai(resultSet.getString("MaLoai"));
+			lSP.setTenLoaiSP(resultSet.getString("TenLoaiSP"));
+			listLoaiSP.add(lSP);
 
-			LoaiSP loaisp = new LoaiSP(maLoai, tenLoaiSP);
-			listLoaiSP.add(loaisp);
+			/*
+			 * String maLoai = resultSet.getString("MaLoai"); String tenLoaiSP =
+			 * resultSet.getString("TenLoaiSP");
+			 * 
+			 * LoaiSP loaisp = new LoaiSP(maLoai, tenLoaiSP); listLoaiSP.add(loaisp);
+			 */
 		}
 
 		resultSet.close();
@@ -77,28 +70,65 @@ public class LoaiSPDAO {
 		return listLoaiSP;
 	}
 
-	public boolean deleteLoaiSP(LoaiSP loaisp) throws SQLException {
-		String sql = "DELETE FROM loaisp where MaLoai = ?";
+	// lay ma loai cao nhat
+	public String maxMaLoai() {
+		String ma = "";
+		try {
+			connect();
+			String sqlExec = "SELECT TOP 1(MaLoai) FROM LOAISP order by MaLoai DESC";
 
+			PreparedStatement statement = jdbcConnection.prepareStatement(sqlExec);
+
+			statement.setEscapeProcessing(true);
+			statement.setQueryTimeout(15);
+
+			ResultSet res = statement.executeQuery();
+
+			res.next();
+			String temp = res.getString(1);
+
+			temp = temp.substring(2, temp.length());
+			int so = Integer.parseInt(temp) + 1;
+			temp = Integer.toString(so);
+			if (temp.length() == 1)
+				ma = "L00" + temp;
+			else if (temp.length() == 2)
+				ma = "L0" + temp;
+			else
+				ma = "L" + temp;
+
+			disconnect();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return ma;
+	}
+
+	// them loai san pham
+	public boolean insertLoaiSP(LoaiSP lSP) throws SQLException {
+		String sql = "INSERT INTO LOAISP (MaLoai,TenLoaiSP) VALUES (?, ?)";
 		connect();
 
 		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-		statement.setString(1, loaisp.getMaLoai());
+		statement.setString(1, lSP.getMaLoai());
+		statement.setString(2, lSP.getTenLoaiSP());
 
-		boolean rowDeleted = statement.executeUpdate() > 0;
+		boolean rowInserted = statement.executeUpdate() > 0;
 		statement.close();
 		disconnect();
-		return rowDeleted;
+		return rowInserted;
 	}
 
-	public boolean updateLoaiSP(LoaiSP loaisp) throws SQLException {
-		String sql = "UPDATE loaisp SET TenLoaiSP = ?";
+	// sua loai san pham
+	public boolean updateLoaiSP(LoaiSP lSP) throws SQLException {
+		String sql = "UPDATE LOAISP SET TenLoaiSP = ?";
 		sql += " WHERE MaLoai = ?";
 		connect();
 
 		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-		statement.setString(1, loaisp.getMaLoai());
-		statement.setString(2, loaisp.getTenLoaiSP());
+		statement.setString(1, lSP.getTenLoaiSP());
+		statement.setString(2, lSP.getMaLoai());
 
 		boolean rowUpdated = statement.executeUpdate() > 0;
 		statement.close();
@@ -106,9 +136,25 @@ public class LoaiSPDAO {
 		return rowUpdated;
 	}
 
+	// xoa loai san pham
+	public boolean deleteLoaiSP(LoaiSP lSP) throws SQLException {
+		String sql = "DELETE FROM LOAISP where MaLoai = ?";
+
+		connect();
+
+		PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+		statement.setString(1, lSP.getMaLoai());
+
+		boolean rowDeleted = statement.executeUpdate() > 0;
+		statement.close();
+		disconnect();
+		return rowDeleted;
+	}
+
+	// tim kiem loai san pham theo ma loai
 	public LoaiSP getLoaiSP(String MaLoai) throws SQLException {
-		LoaiSP loaisp = null;
-		String sql = "SELECT * FROM loaisp WHERE MaLoai = ?";
+		LoaiSP lSP = null;
+		String sql = "SELECT * FROM LOAISP WHERE MaLoai = ?";
 
 		connect();
 
@@ -118,14 +164,21 @@ public class LoaiSPDAO {
 		ResultSet resultSet = statement.executeQuery();
 
 		if (resultSet.next()) {
-			String TenLoaiSP = resultSet.getString("TenLoaiSP");
 
-			loaisp = new LoaiSP(MaLoai, TenLoaiSP);
+			lSP = new LoaiSP();
+			lSP.setMaLoai(resultSet.getString("MaLoai"));
+			lSP.setTenLoaiSP(resultSet.getString("TenLoaiSP"));
+
+			/*
+			 * String TenLoaiSP = resultSet.getString("TenLoaiSP");
+			 * 
+			 * loaisp = new LoaiSP(MaLoai, TenLoaiSP);
+			 */
 		}
 
 		resultSet.close();
 		statement.close();
 
-		return loaisp;
+		return lSP;
 	}
 }
