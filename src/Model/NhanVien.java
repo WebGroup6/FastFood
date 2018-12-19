@@ -53,9 +53,14 @@ public class NhanVien {
 	}
 	
 	public NhanVien() {
-		
+		super();
 	}
 	
+	
+	public NhanVien(String maNV) {
+		super();
+		this.maNV = maNV;
+	}
 	public NhanVien(String maNV,String hoTen,String gioiTinh,String diaChi,String email,String sdt,String tenDN)
 	{
 		super();

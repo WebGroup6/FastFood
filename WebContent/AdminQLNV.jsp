@@ -22,7 +22,12 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
 <!-- Custom styles for this template -->
-<link rel="stylesheet" href="./css/CSS.css">
+<c:if test="${nhanVien == null }">
+	<link rel="stylesheet" href="./css/CSS.css">
+</c:if>
+<c:if test="${nhanVien != null }">
+	<link rel="stylesheet" href="../css/CSS.css">
+</c:if>
 </head>
 
 <body>
@@ -39,8 +44,14 @@
 
 			</div>
 			<div id="img">
-				<img src="img/logo1.png" class="d-inline-block align-top"
-					width="100" height="85">
+				<c:if test="${nhanVien == null }">
+					<img src="img/logo1.png" class="d-inline-block align-top"
+						width="100" height="85">
+				</c:if>
+				<c:if test="${nhanVien != null }">
+					<img src="../img/logo1.png" class="d-inline-block align-top"
+						width="100" height="85">
+				</c:if>
 			</div>
 			<div id="header">
 				<h3>WELCOME ADMIN</h3>
@@ -118,7 +129,7 @@
 					<table class="table table-bordered">
 
 						<tr>
-							<th width="80px">Mã NV</th>
+							<th>Mã NV</th>
 							<th>Họ tên</th>
 							<th>Giới tính</th>
 							<th>Địa chỉ</th>
@@ -130,17 +141,18 @@
 
 						<c:forEach var="nv" items="${listNV}">
 							<tr>
-								<td><c:out value="${nv.maNV}" /></td>
-								<td><c:out value="${nv.hoTen}" /></td>
-								<td><c:out value="${nv.gioiTinh} " /></td>
-								<td><c:out value="${nv.diaChi} " /></td>
-								<td><c:out value="${nv.email} " /></td>
-								<td><c:out value="${nv.sdt} " /></td>
-								<td><c:out value="${nv.tenDN} " /></td>
+								<td><c:out value="${nv.getMaNV()}" /></td>
+								<td><c:out value="${nv.getHoTen()}" /></td>
+								<td><c:out value="${nv.getGioiTinh()} " /></td>
+								<td><c:out value="${nv.getDiaChi()} " /></td>
+								<td><c:out value="${nv.getEmail()} " /></td>
+								<td><c:out value="${nv.getSdt()} " /></td>
+								<td><c:out value="${nv.getTenDN()} " /></td>
 								<td><a
-									href="/Version3?editmaNV=<c:out value="${nv.maNV}" />"
-									class="edit"> <span class="glyphicon glyphicon-edit"></span>
-								</a> <a href="NhanVienServlet/delete?maNV=<c:out value='${nv.maNV}' />"
+									href="/FastFood/NhanVienServlet/edit?maNV=<c:out value="${nv.getMaNV()}" />"
+									class="edit"> <span class="glyphicon glyphicon-edit"></span></a>
+									<a
+									href="/FastFood/NhanVienServlet/delete?maNV=<c:out value="${nv.getMaNV()}" />"
 									class="delete"> <span
 										class="glyphicon glyphicon-remove-sign"></span>
 								</a></td>
@@ -151,7 +163,7 @@
 
 
 
-				<!-- PHAN TRANG -->
+				<%-- <!-- PHAN TRANG -->
 
 
 				<div class="pull-left">
@@ -189,7 +201,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- end phaan trang -->
+				<!-- end phaan trang --> --%>
 
 				<div class="container">
 					<div class="btnThem">
@@ -198,28 +210,48 @@
 					</div>
 				</div>
 
-
+				<c:if test="${nhanVien == null }">
+					<form method="post" action="/FastFood/NhanVienServlet/insert">
+				</c:if>
+				<c:if test="${nhanVien != null }">
+					<form method="post" action="/FastFood/NhanVienServlet/update">
+				</c:if>
 				<!--Themnhanvien-->
-				<form action="NhanVienServlet/insert" method="get">
-					<div class="modal fade" id="myModal">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-content">
-
-								<!-- Modal Header -->
+				<div class="modal fade" id="myModal">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<!-- Modal Header -->
+							<c:if test="${nhanVien == null }">
 								<div class="modal-header">
 									<h3 class="modal-title">Thêm nhân viên</h3>
 								</div>
-								<!-- Modal body -->
-								<div class="modal-body">
+							</c:if>
+							<c:if test="${nhanVien != null }">
+								<div class="modal-header">
+									<h3 class="modal-title">Sửa nhân viên</h3>
+								</div>
+							</c:if>
 
+							<div class="modal-body">
+								<div class="">
 									<div class="form_row">
-										<label>Mã nhân viên:</label> <input type="text"
-											class="form_input" name="maNV" id="maNV" required />
+										<c:if test="${nhanVien != null }">
+											<label>Mã nhân viên:</label>
+											<input type="text" class="form_input" name="maNV"
+												required="required" readonly="readonly"
+												value="${nhanVien.getMaNV() }" />
+										</c:if>
+										<c:if test="${nhanVien == null }">
+											<label>Mã nhân viên:</label>
+											<input type="text" class="form_input" name="maNV"
+												required="required" readonly="readonly" value="${maNVNew}" />
+										</c:if>
 									</div>
 
 									<div class="form_row">
-										<label>Họ tên :</label> <input type="text" class="form_input"
-											name="hoTen" id="hoTen" required />
+										<label>Tên nhân viên :</label> <input type="text"
+											class="form_input" name="tenNV" required="required"
+											value="${nhanVien.getHoTen() }" />
 									</div>
 
 									<div class="form_row">
@@ -230,80 +262,99 @@
 
 										</form>
 									</div>
-
-
 									<div class="form_row">
-										<label> Địa chỉ:</label> <input type="text" class="form_input"
-											name="diaChi" id="diaChi" />
+										<label>Địa chỉ :</label> <input type="text" class="form_input"
+											name="diaChi" required="required"
+											value="${nhanVien.getDiaChi() }" />
 									</div>
 									<div class="form_row">
-										<label> Email:</label> <input type="text" class="form_input"
-											name="email" id="email" />
+										<label> Email :</label> <input type="text" class="form_input"
+											name="email" required="required"
+											value="${nhanVien.getEmail() }" />
 									</div>
 									<div class="form_row">
-										<label> Số điện thoại:</label> <input type="text"
-											class="form_input" name="sdt" id="sdt" />
+										<label> Số điện thoại :</label> <input type="text"
+											class="form_input" name="sdt" required="required"
+											value="${nhanVien.getSdt() }" />
 									</div>
 									<div class="form_row">
-										<label> Tên đăng nhập:</label> <input type="text"
-											class="form_input" name="tenDN" id="tenDN" />
+										<label> Tên đăng nhập :</label> <input type="text"
+											class="form_input" name="tenDN" required="required"
+											value="${nhanVien.getTenDN() }" />
 									</div>
 									<div class="form_row">
 										<label>Mat khau:</label> <input type="text" class="form_input"
 											name="mK" id="mK" />
 									</div>
-									
+
 									<div class="form_row">
-										<label>Quyen han:</label> 
-										<input type="radio" name="quyenHan" value="Admin" />Admin <br>
-										<input type="radio" name="quyenHan" value="User"/>User <br>
+										<label>Quyen han:</label> <input type="radio" name="quyenHan"
+											value="Admin" />Admin <br> <input type="radio"
+											name="quyenHan" value="User" />User <br>
 									</div>
-									
 
 
-								</div>
-								<!-- Modal footer -->
-								<div class="modal-footer">
-									<button type="submit" class="btn btn-success">Thêm</button>
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Hủy</button>
+
 								</div>
 							</div>
-						</div>
-					</div>
-				</form>
+							<!-- Modal footer -->
+							<div class="modal-footer">
+								<div class="pull-right">
+									<c:if test="${nhanVien == null }">
+										<input type="submit" class="btn btn-success" value="Thêm Mới"></input>
+									</c:if>
+									<c:if test="${nhanVien != null }">
+										<input type="submit" class="btn btn-success"
+											value="Sửa Nhân viên"></input>
+									</c:if>
 
-
-
-				<!--Xoa nhan vien-->
-				<div class="container">
-					<div id="myModalXoaHD" class="modal fade" tabindex="-1"
-						role="dialog">
-						<div class="modal-dialog-delete" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<h4 class="modal-title">Thông báo</h4>
 								</div>
-								<div class="modal-body">
-									<p>Bạn có muốn xóa nhân viên này không?</p>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary"
-										onclick="DongYXoa()">Có</button>
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">Không</button>
-								</div>
+								<button type="button" class="btn btn-secondary pull-left"
+									data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
 				</div>
+				<!--  -->
+				</form>
+
+
+				<!--Xoa nhan vien-->
+				<!-- <div class="container">
+						<div id="myModalXoaHD" class="modal fade" tabindex="-1"
+							role="dialog">
+							<div class="modal-dialog-delete" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title">Thông báo</h4>
+									</div>
+									<div class="modal-body">
+										<p>Bạn có muốn xóa nhân viên này không?</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary"
+											onclick="DongYXoa()">Có</button>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Không</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
 			</div>
 		</div>
 	</div>
+
+	<c:if test="${nhanVien != null }">
+		<script type="text/javascript">
+			jQuery.noConflict();
+			$('#myModal').modal('show');
+		</script>
+	</c:if>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
