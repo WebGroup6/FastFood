@@ -25,10 +25,13 @@ public class LoaiSP {
 		this.tenLoaiSP = tenLoaiSP;
 	}
     
-	public LoaiSP() {}
-	public LoaiSP(String maLoai)
-	{
+	public LoaiSP() {
+		super();
+	}
+	public LoaiSP(String maLoai) {
+		super();
 		this.maLoai = maLoai;
 	}
+	
 
 }

@@ -16,8 +16,8 @@ import java.util.List;
 import Model.*;
 import DAO.*;
 
-@WebServlet(name = "LoaiSP", urlPatterns = { "/LoaiSPServlet", "/LoaiSPServlet/insert", "/LoaiSPServlet/delete",
-		"/LoaiSPServlet/edit" })
+@WebServlet(name = "LoaiSP", urlPatterns = { "/LoaiSPServlet", "/LoaiSPServlet/insert", "/LoaiSPServlet/edit",
+		"/LoaiSPServlet/update", "/LoaiSPServlet/delete" })
 
 public class LoaiSPServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,7 +26,6 @@ public class LoaiSPServlet extends HttpServlet {
 
 	public LoaiSPServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public void init() {
@@ -36,54 +35,55 @@ public class LoaiSPServlet extends HttpServlet {
 
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String path = request.getServletPath();
-		switch (path) {
-		case "/LoaiSPServlet":
-			listLoaiSP(request, response);
-			break;
-		case "/LoaiSPServlet/insert":
-			try {
+		try {
+
+			System.out.println(path);
+			switch (path) {
+			case "/LoaiSPServlet/insert":
 				insertLoaiSP(request, response);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			break;
-		case "/LoaiSPServlet/delete":
-			try {
-				deleteLoaiSP(request, response);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			break;
-		case "/LoaiSPServlet/edit":
-			try {
+				break;
+			case "/LoaiSPServlet/update":
+				updateLoaiSP(request, response);
+				break;
+			case "/LoaiSPServlet/edit":
 				editLoaiSP(request, response);
-			} catch (SQLException e) {
-				e.printStackTrace();
+				break;
+			case "/LoaiSPServlet/delete":
+				deleteLoaiSP(request, response);
+				break;
+			default:
+				listLoaiSP(request, response);
+				break;
 			}
-			break;
-		default:
-			break;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		doPost(request, response);
 	}
 
 	private void listLoaiSP(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+
 		List<LoaiSP> listLoaiSP;
+		String maLoaiMoi = "";
 		try {
+			maLoaiMoi = loaiSPDAO.maxMaLoai();
+
 			listLoaiSP = loaiSPDAO.listAllLoaiSP();
 			request.setAttribute("listLoaiSP", listLoaiSP);
+			request.setAttribute("maLoaiMoi", maLoaiMoi);
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -98,36 +98,60 @@ public class LoaiSPServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
-		LoaiSP loaisp = new LoaiSP();
-		loaisp.setMaLoai(request.getParameter("maLoai"));
-		loaisp.setTenLoaiSP(request.getParameter("tenLoaiSP"));
+		LoaiSP lSP = new LoaiSP();
+		lSP.setMaLoai(request.getParameter("txtMaLoai"));
+		lSP.setTenLoaiSP(request.getParameter("txtTenLoaiSP"));
 
-		loaiSPDAO.insertLoaiSP(loaisp);
+		loaiSPDAO.insertLoaiSP(lSP);
 
-		response.sendRedirect("/Version3/LoaiSPServlet");
+		response.sendRedirect("/FastFood/LoaiSPServlet");
 
 	}
 
-	private void editLoaiSP(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+	private void editLoaiSP(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
 
 //		String maLoai=request.getParameter("maLoai");
 //		String tenLoai=request.getParameter("tenLoaiSP");
-		LoaiSP loaisp = new LoaiSP();
-		loaisp.setMaLoai(request.getParameter("maLoai"));
-		loaisp.setTenLoaiSP(request.getParameter("tenLoaiSP"));
+		/*
+		 * LoaiSP loaisp = new LoaiSP();
+		 * loaisp.setMaLoai(request.getParameter("txtMaLoai"));
+		 * loaisp.setTenLoaiSP(request.getParameter("txtTenLoaiSP"));
+		 * 
+		 * try { loaiSPDAO.updateLoaiSP(loaisp);
+		 * 
+		 * } catch (SQLException e) {
+		 * 
+		 * e.printStackTrace(); }
+		 * 
+		 * request.setAttribute("sua", loaisp);
+		 * 
+		 * String url = request.getContextPath() + "/LoaiSPServlet";
+		 * response.sendRedirect(url);
+		 */
 
-		try {
-			loaiSPDAO.updateLoaiSP(loaisp);
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 
-		} catch (SQLException e) {
+		String maLoai = request.getParameter("maLoai");
+		LoaiSP lSP = new LoaiSP();
+		lSP = loaiSPDAO.getLoaiSP(maLoai);
+		request.setAttribute("loaiSanPham", lSP);
+		request.getRequestDispatcher("/LoaiSPServlet").forward(request, response);
 
-			e.printStackTrace();
-		}
+	}
 
-		request.setAttribute("sua", loaisp);
+	public void updateLoaiSP(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 
-		String url = request.getContextPath() + "/LoaiSPServlet";
-		response.sendRedirect(url);
+		LoaiSP lSP = new LoaiSP();
+
+		lSP.setMaLoai(request.getParameter("txtMaLoai"));
+		lSP.setTenLoaiSP(request.getParameter("txtTenLoaiSP"));
+		loaiSPDAO.updateLoaiSP(lSP);
+		response.sendRedirect("/FastFood/LoaiSPServlet");
 	}
 
 	private void deleteLoaiSP(HttpServletRequest request, HttpServletResponse response)
@@ -141,9 +165,12 @@ public class LoaiSPServlet extends HttpServlet {
 
 			e.printStackTrace();
 		}
+		response.sendRedirect("/FastFood/LoaiSPServlet");
 
-		String url = request.getContextPath() + "/LoaiSPServlet";
-		response.sendRedirect(url);
+		/*
+		 * String url = request.getContextPath() + "/LoaiSPServlet";
+		 * response.sendRedirect(url);
+		 */
 	}
 
 }
