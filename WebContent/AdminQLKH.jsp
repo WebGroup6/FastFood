@@ -82,8 +82,9 @@
 				<!--left bar-->
 				<ul class="nav nav-sidebar">
 					<li><a href="">Thống Kê</a></li>
-					<li><a href="#">Khách hàng</a></li>
+					<li><a href="KhachHangServlet">Khách hàng</a></li>
 					<li><a href="NhanVienServlet">Nhân viên</a></li>
+					<li><a href="LoaiSPServlet">Loại sản phẩm</a></li>
 					<li><a href="SanPhamServlet">Sản phẩm</a></li>
 					<li><a href="HoaDonServlet">Đơn hàng</a></li>
 					<li><a href="TinKMServlet">Tin khuyến mãi</a></li>
@@ -137,7 +138,7 @@
 								<td><c:out value="${kh.tichLuy}" /></td>
 
 								<td><a
-									href=" KhachHangServlet/delete?maKH=<c:out value='${kh.maKH}' />"
+									href="/FastFood/KhachHangServlet/delete?maKH=<c:out value='${kh.maKH}' />"
 									class="delete"> <span
 										class="glyphicon glyphicon-remove-sign"></span>
 								</a></td>

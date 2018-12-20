@@ -157,10 +157,7 @@
 
 
 							<div class="modal-body">
-								<div class="form-group">
-									<input id="makh" name="maKH" class="form-control" placeholder="Makh"
-										require="">
-								</div>
+								
 								<div class="form-group">
 									<input id="hoTen" name="hoTen" class="form-control" placeholder="Họ và tên"
 										require="">
@@ -192,7 +189,7 @@
 									<input id="MKnhaplai" name="mK" class="form-control"
 										placeholder="Nhập lại Mật khẩu" required="">
 								</div>
-
+ 
 
 
 							</div>
