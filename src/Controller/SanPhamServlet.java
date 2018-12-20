@@ -21,7 +21,7 @@ import Model.LoaiSP;
 import Model.SanPham;
 
 @WebServlet(name = "SanPham", urlPatterns = { "/SanPhamServlet", "/SanPhamServlet/insert", "/SanPhamServlet/edit",
-		"/SanPhamServlet/update", "/SanPhamServlet/delete" })
+		"/SanPhamServlet/update", "/SanPhamServlet/delete", "/ThucDon" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50) // 50MB
@@ -56,6 +56,9 @@ public class SanPhamServlet extends HttpServlet {
 				break;
 			case "/SanPhamServlet/delete":
 				deleteSanPham(request, response);
+				break;
+			case "/ThucDon":
+				showSanPham(request, response);
 				break;
 			default:
 				listSanPham(request, response);
@@ -231,6 +234,50 @@ public class SanPhamServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	//show san pham tren trang client
+	
+	private void showSanPham(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, ClassNotFoundException {
+
+		// Tiếng Việt hoạt động
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+
+		List<SanPham> listSP;
+		List<LoaiSP> listLoaiSP;
+
+		// Phục vụ chức năng search , sort, xem theo loại sản phẩm
+		String search = "*";
+		if (request.getParameter("search") != null) {
+			search = request.getParameter("search");
+		}
+		String sort = "*";
+		if (request.getParameter("sort") != null) {
+			sort = request.getParameter("sort");
+		}
+		String loaiSP = "*";
+		if (request.getParameter("selectLoaiSP") != null) {
+			loaiSP = request.getParameter("selectLoaiSP");
+		}
+		
+		try {
+
+			listSP = SPDAO.listAllPhanTrang(sort, search, loaiSP);
+			listLoaiSP = LOAISPDAO.listAllLoaiSP();			
+			request.setAttribute("listSP", listSP);
+			request.setAttribute("listLoaiSP", listLoaiSP);
+			request.setAttribute("search", search);
+			request.setAttribute("sort", sort);
+			request.setAttribute("selectLoaiSP", loaiSP);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			request.setAttribute("loi", e.toString());
+		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ThucDon.jsp");
+		dispatcher.forward(request, response);
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
