@@ -159,7 +159,7 @@
 					<form method="post" action="/FastFood/LoaiSPServlet/insert">
 				</c:if>
 				<c:if test="${loaiSanPham != null }">
-					<form method="get" action="/FastFood/LoaiSPServlet/update">
+					<form method="post" action="/FastFood/LoaiSPServlet/update">
 				</c:if>
 
 				<!-- The Modal THEM-->
@@ -212,7 +212,7 @@
 									</c:if>
 									<c:if test="${loaiSanPham != null }">
 										<input type="submit" class="btn btn-success"
-											value="Sửa loại sản phẩm"></input>
+											value="Sửa"></input>
 									</c:if>
 
 								</div>
