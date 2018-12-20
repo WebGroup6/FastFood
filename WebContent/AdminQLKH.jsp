@@ -152,7 +152,7 @@
 				<!-- PHAN TRANG -->
 
 
-				<div class="pull-left">
+				<%-- <div class="pull-left">
 					<div class="col-xs-12">
 						<div class="shop-pagination pull-right">
 							<ul id="" class="pagination-sm pagination">
@@ -186,7 +186,8 @@
 							</ul>
 						</div>
 					</div>
-				</div>
+				</div> --%>
+				
 			</div>
 		</div>
 	</div>

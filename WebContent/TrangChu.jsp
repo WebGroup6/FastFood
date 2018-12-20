@@ -144,7 +144,7 @@
 
 
 
-			<form action="KhachHangServlet/insert" method="get">
+			<form action="/FastFood/KhachHangServlet/insert" method="post">
 				<div class="modal fade" id="myModal1">
 					<div class="modal-dialog modal-dialog-centered">
 						<div class="modal-content">
@@ -199,10 +199,12 @@
 
 
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									onclick="validateFormDKy()">
+								<button type="submit" class="btn btn-secondary"
+									>
 									<i class="fa fa-arrow-right"></i>
 								</button>
+								
+								<!-- onclick="validateFormDKy()" -->
 							</div>
 
 						</div>

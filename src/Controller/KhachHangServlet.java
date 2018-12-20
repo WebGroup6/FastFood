@@ -33,48 +33,47 @@ public class KhachHangServlet extends HttpServlet {
 
     public void init() {
         String jdbcURL = getServletContext().getInitParameter("jdbcURL");
-        String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
-        String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
  
-        khDAO = new KhachHangDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        khDAO = new KhachHangDAO(jdbcURL);
  
     }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String path = request.getServletPath();
+		try {
+
+			switch (path) {
+			case "/KhachHangServlet/insert":
+				insertKhachHang(request, response);
+				break;
+			
+			case "/KhachHangServlet/delete":
+				deleteKhachHang(request, response);
+				break;
+			default:
+				listKhachHang(request, response);
+				break;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
-		String path = request.getServletPath();
-		switch (path) {
-		case "/KhachHangServlet":
-			listKhachHang(request, response);
-			break;
-		case "/KhachHangServlet/insert":
-			try {
-				insertKhachHang(request, response);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			break;
-		case "/KhachHangServlet/delete":
-			try {
-				deleteKhachHang(request, response);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
-		default:
-			break;
-		}
+		doPost(request, response);
     	
     	
 	}
 	private void listKhachHang(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<KhachHang> listKH;
+		String maKHNew = "";
 		try {
+			
+			maKHNew = khDAO.maKhachHangCaoNhat();
 			listKH = khDAO.listAllKH();
 			request.setAttribute("listKH", listKH);
+			request.setAttribute("maKHNew", maKHNew);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,10 +83,7 @@ public class KhachHangServlet extends HttpServlet {
     	dispatcher.forward(request, response);
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	
 	
 	
 	
@@ -118,7 +114,7 @@ public class KhachHangServlet extends HttpServlet {
 		khDAO.insertKH(kh);
 		
 		System.out.println("loi");
-		response.sendRedirect("/Version3/KhachHangServlet");
+		response.sendRedirect("/FastFood/KhachHangServlet");
 
 	}
 	
@@ -133,10 +129,7 @@ public class KhachHangServlet extends HttpServlet {
 		khDAO.deleteKH(kh);
 //		accDAO.deleteACC(acc);
 		
-    	
-		
-		String url = request.getContextPath() + "/KhachHangServlet";
-        response.sendRedirect(url);
+		response.sendRedirect("/FastFood/KhachHangServlet");
     }
 	
 

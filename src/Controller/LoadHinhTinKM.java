@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import DAO.TinKMDAO;
 
 import Model.TinKM;
@@ -20,7 +19,7 @@ import Model.TinKM;
 /**
  * Servlet implementation class LoadHinhTinKM
  */
-@WebServlet(urlPatterns = { "/LoadHinhTinKM"})
+@WebServlet(urlPatterns = { "/LoadHinhTinKM" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50) // 50MB
@@ -31,7 +30,7 @@ public class LoadHinhTinKM extends HttpServlet {
 	private TinKMDAO kmDAO;
 
 	public void init() {
-		
+
 		String jdbcURL = getServletContext().getInitParameter("jdbcURL");
 //		String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
 //		String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
@@ -50,6 +49,7 @@ public class LoadHinhTinKM extends HttpServlet {
 		TinKM tin = null;
 		try {
 			tin = kmDAO.getTinKM(maTKM);
+//			System.out.println(tin.getMaTKM());
 			Blob fileData = tin.getHinhBlob();
 			InputStream is = null;
 			is = fileData.getBinaryStream();

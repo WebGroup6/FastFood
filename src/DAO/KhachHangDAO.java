@@ -15,14 +15,12 @@ import Model.NhanVien;
 public class KhachHangDAO {
 
 	private String jdbcURL;
-    private String jdbcUsername;
-    private String jdbcPassword;
+    
     private Connection jdbcConnection;
      
-    public KhachHangDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+    public KhachHangDAO(String jdbcURL) {
         this.jdbcURL = jdbcURL;
-        this.jdbcUsername = jdbcUsername;
-        this.jdbcPassword = jdbcPassword;
+        
     }
      
     protected void connect() throws SQLException {
@@ -33,7 +31,7 @@ public class KhachHangDAO {
                 throw new SQLException(e);
             }
             jdbcConnection = DriverManager.getConnection(
-                                        jdbcURL, jdbcUsername, jdbcPassword);
+                                        jdbcURL);
            
         }
     }
@@ -142,16 +140,15 @@ public class KhachHangDAO {
         ResultSet resultSet = statement.executeQuery();
          
         if (resultSet.next()) {
-        	 
-             String TenDN=resultSet.getString("TenDN");
-             String HoTen = resultSet.getString("HoTen");
-             
-             String DiaChi=resultSet.getString("DiaChi");
-             String Email=resultSet.getString("Email");
-             String SDT=resultSet.getString("SDT");
-             int TichLuy=resultSet.getInt("TichLuy");
-            
-            kh = new KhachHang(MaKH,TenDN,HoTen,DiaChi,Email,SDT,TichLuy);
+        	kh=new KhachHang();
+        	kh.setMaKH(resultSet.getString("MaKH"));
+        	kh.setTenDN(resultSet.getString("TenDN"));
+        	kh.setHoTen(resultSet.getString("HoTen"));
+        	kh.setDiaChi(resultSet.getString("DiaChi"));
+        	kh.setEmail(resultSet.getString("Email"));
+        	kh.setSdt(resultSet.getString("SDT"));
+        	kh.setTichLuy(resultSet.getInt("TichLuy"));
+        	
         }
          
         resultSet.close();
@@ -159,4 +156,42 @@ public class KhachHangDAO {
          
         return kh;
     }
+    
+    public String maKhachHangCaoNhat() {
+
+		String re = "";
+		try {
+			connect();
+			String sqlExec = "EXEC KHACHHANG_LayMaKHCaoI";
+
+			PreparedStatement statement = jdbcConnection.prepareStatement(sqlExec);
+
+			statement.setEscapeProcessing(true);
+			statement.setQueryTimeout(15);
+
+			ResultSet res = statement.executeQuery();
+
+			res.next();
+			String temp = res.getString(1);
+
+			// temp = "SP###"
+			// Xu ly chuoi
+			temp = temp.substring(2, temp.length());
+			int so = Integer.parseInt(temp) + 1;
+			temp = Integer.toString(so);
+			if (temp.length() == 1)
+				re = "KH00" + temp;
+			else if (temp.length() == 2)
+				re = "KH0" + temp;
+			else
+				re = "KH" + temp;
+
+			disconnect();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return re;
+	}
+
+    
 }

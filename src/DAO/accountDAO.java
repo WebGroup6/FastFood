@@ -14,14 +14,10 @@ import java.util.List;
 public class accountDAO {
 
 	private String jdbcURL;
-    private String jdbcUsername;
-    private String jdbcPassword;
     private Connection jdbcConnection;
      
     public accountDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
         this.jdbcURL = jdbcURL;
-        this.jdbcUsername = jdbcUsername;
-        this.jdbcPassword = jdbcPassword;
     }
      
     protected void connect() throws SQLException {
@@ -32,7 +28,7 @@ public class accountDAO {
                 throw new SQLException(e);
             }
             jdbcConnection = DriverManager.getConnection(
-                                        jdbcURL, jdbcUsername, jdbcPassword);
+                                        jdbcURL);
            
         }
     }
