@@ -45,6 +45,7 @@ public class HoaDonDAO {
         }
     }
     
+    //load danh sách hóa đơn
     public List<HoaDon> listAllHD() throws SQLException {
         List<HoaDon> listHD = new ArrayList<>();
          
@@ -76,9 +77,9 @@ public class HoaDonDAO {
          
         return listHD;
     }
-    
+    //thêm hóa đơn
     public boolean insertHD(HoaDon hd) throws SQLException {
-        String sql = "INSERT INTO HOADON (MaHD,MAKH,MANV,TONGTIEN,NGAYLAP,TRANGTHAI) VALUES (?, ?,?,?,?,?)";
+        String sql = "INSERT INTO HOADON (MaHD,MaKH,MaNV,TongTien,NgayLap,TrangThai) VALUES (?, ?,?,?,?,?)";
         connect();
          
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
@@ -96,23 +97,7 @@ public class HoaDonDAO {
         disconnect();
         return rowInserted;
     }
-    
-    public boolean deleteHD(HoaDon hd) throws SQLException {
-        String sql = "DELETE FROM HOADON where MaHD = ?";
-        
-        connect();
-         
-        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setString(1,hd.getMaHD());
-        statement.setString(2, hd.getMaKH());
-        statement.setString(3, hd.getMaNV());
-         
-        boolean rowDeleted = statement.executeUpdate() > 0;
-        statement.close();
-        disconnect();
-        return rowDeleted;     
-    }
-     
+    //Sửa hóa đơn
     public boolean updateHD(HoaDon hd) throws SQLException {
         String sql = "UPDATE HOADON SET  TongTien= ?,NgayLap = ?, TrangThai = ?";
         sql += " WHERE MaHD = ?";
@@ -132,6 +117,24 @@ public class HoaDonDAO {
         disconnect();
         return rowUpdated;     
     }
+    //Xóa hóa đơn
+    public boolean deleteHD(HoaDon hd) throws SQLException {
+        String sql = "DELETE FROM HOADON where MaHD = ?";
+        
+        connect();
+         
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setString(1,hd.getMaHD());
+       /* statement.setString(2, hd.getMaKH());
+        statement.setString(3, hd.getMaNV());*/
+         
+        boolean rowDeleted = statement.executeUpdate() > 0;
+        statement.close();
+        disconnect();
+        return rowDeleted;     
+    }
+     
+    
      
     public HoaDon getHoaDon(String MaHD) throws SQLException {
     	HoaDon hd = null;

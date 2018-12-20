@@ -92,7 +92,7 @@
 				<!--left bar-->
 				<ul class="nav nav-sidebar">
 					<li><a href="">Thống Kê</a></li>
-					<li><a href="#">Khách hàng</a></li>
+					<li><a href="KhachHangServlet">Khách hàng</a></li>
 					<li><a href="NhanVienServlet">Nhân viên</a></li>
 					<li><a href="LoaiSPServlet">Loại sản phẩm</a></li>
 					<li><a href="SanPhamServlet">Sản phẩm</a></li>
