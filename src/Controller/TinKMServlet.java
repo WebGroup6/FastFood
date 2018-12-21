@@ -19,7 +19,7 @@ import DAO.TinKMDAO;
 import Model.TinKM;
 
 @WebServlet(name = "TinKM", urlPatterns = { "/TinKMServlet", "/TinKMServlet/insert", "/TinKMServlet/edit",
-		"/TinKMServlet/delete", "/TinKMServlet/update" })
+		"/TinKMServlet/delete", "/TinKMServlet/update", "/TinKMServlet/showKM","/TinKMServlet/showChiTietKM" })
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 		maxFileSize = 1024 * 1024 * 10, // 10MB
@@ -69,6 +69,12 @@ public class TinKMServlet extends HttpServlet {
 			case "/TinKMServlet/delete":
 				deleteTinKM(request, response);
 				break;
+			case "/TinKMServlet/showKM":
+				listTinKMTrangchu(request, response);
+				break;
+			case "/TinKMServlet/showChiTietKM":
+				showChiTiet(request, response);
+				break;
 			default:
 				listTinKM(request, response);
 				break;
@@ -93,6 +99,24 @@ public class TinKMServlet extends HttpServlet {
 			request.setAttribute("loi", e.toString());
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AdminTinKM.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void listTinKMTrangchu(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<TinKM> listTKM;
+		
+		try {
+			listTKM = kmDAO.listAllKM();
+			
+			request.setAttribute("listKM", listTKM);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			request.setAttribute("loi", e.toString());
+		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/KhuyenMai.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -138,11 +162,27 @@ public class TinKMServlet extends HttpServlet {
 
 		TinKM tin = new TinKM();
 		tin = kmDAO.getTinKM(maTKM);
-		
+
 		request.setAttribute("tinKhuyenMai", tin);
-		
-		
+
 		request.getRequestDispatcher("/TinKMServlet").forward(request, response);
+
+	}
+	
+	private void showChiTiet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+
+		String maTKM = request.getParameter("maTKM");
+
+		TinKM tin = new TinKM();
+		tin = kmDAO.getTinKM(maTKM);
+
+		request.setAttribute("tinKhuyenMai", tin);
+
+		request.getRequestDispatcher("/TinKMServlet/showKM").forward(request, response);
 
 	}
 

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.KhachHangDAO;
-import DAO.NhanVienDAO;
+
 import DAO.accountDAO;
 import Model.ACCOUNT;
 import Model.KhachHang;
