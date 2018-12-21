@@ -76,7 +76,7 @@
             </div> 
 
     <div class="checkdki-dn ml-auto">
-        <a href="#" data-toggle="modal" data-target="#myModal"  id="dangNhap"><i class="fa fa-user"></i> Đăng Nhập</a> |
+        <a href="Login.jsp"  id="dangNhap"><i class="fa fa-user"></i> Đăng Nhập</a> |
         
         <a href="#" data-toggle="modal" data-target="#myModal1"  id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
     </div>
