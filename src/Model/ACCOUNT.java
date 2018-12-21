@@ -2,11 +2,13 @@ package Model;
 
 
 public class ACCOUNT {
-
-	private String tenDN;
-	private String mK;
-	private String quyenHan;
 	
+	private String tenDN;
+	
+	private String mK;
+	
+	private String quyenHan;
+
 	public String getTenDN() {
 		return tenDN;
 	}

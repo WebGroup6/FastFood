@@ -113,8 +113,7 @@ public class accountDAO {
 
 	public ACCOUNT Login(String username, String password) throws SQLException {
 		ACCOUNT ac=null;
-		ACCOUNT ad=null;
-		ACCOUNT user=null;
+		
 		String sql = "select * from ACCOUNT where TENDN='" + username + "' and MK='" + password + "'";
 		
 		connect();
@@ -125,12 +124,18 @@ public class accountDAO {
 			 ac = new ACCOUNT();
 			ac.setTenDN(resultSet.getString("TenDN"));
 			ac.setmK(resultSet.getString("MK"));
+			
 			ac.setQuyenHan(resultSet.getString("QuyenHan"));
+			
 		}
+		
 		
 		resultSet.close();
 		statement.close();
 		disconnect();
 		return ac;
+		
+		
 	}
+	
 }

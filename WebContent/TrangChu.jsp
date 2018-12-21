@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ page import="Model.ACCOUNT"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,7 +22,9 @@
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript"
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-
+<%
+	ACCOUNT acc = (ACCOUNT) session.getAttribute("tenDN");
+%>>
 
 </head>
 <body>
@@ -78,77 +80,35 @@
                             <input class="form-control mr-sm-2" type="text" placeholder="Tên món ăn">
                             <button class="btn btn-success" type="submit">Tìm kiếm</button>
                         </form> -->
+				</div>
+			</nav>
+		</div>
 
-                    </div>
-                </nav>
-            </div> 
+		<% if (acc != null) {
+					out.print("Xin chao");
+					out.print(acc.getTenDN());
+				}
+		
+		%>
+		<div class="checkdki-dn ml-auto">
+			
+			<a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i> Đăng
+				Nhập</a> | <a href="#" data-toggle="modal" data-target="#myModal1"
+				id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
+		</div>
+		
+		
 
-    <div class="checkdki-dn ml-auto">
-        <a href="Login.jsp"  id="dangNhap"><i class="fa fa-user"></i> Đăng Nhập</a> |
-        
-        <a href="#" data-toggle="modal" data-target="#myModal1"  id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
-    </div>
-    
-   
-    <div class="hotline">
-        <i class="fa fa-phone-square"> 1800-XXXX</i>
-    </div>
+		<div class="hotline">
+			<i class="fa fa-phone-square"> 1800-XXXX</i>
+		</div>
 
-    <div class="check_giohang">
-        <a href="KtraGioHang.html"><i class="fa fa-shopping-basket"></i> 0 GIỎ HÀNG</a>
-    </div>
+		<div class="check_giohang">
+			<a href="KtraGioHang.html"><i class="fa fa-shopping-basket"></i>
+				0 GIỎ HÀNG</a>
+		</div>
 
 
-    
-
-    <!-- form DangNhap DangKy -->
-    
-
-
-    <div class="container"> 
-
-       
-            <div class="modal fade" id="myModal" >
-        
-                    <div class="modal-dialog modal-dialog-centered ">
-                        <div class="modal-content">
-                            
-                             
-                              <div class="modal-header">
-                                <h4 class="modal-title">Đăng Nhập</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              </div>
-                              
-                              
-                              <div class="modal-body">                                     
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Tên đăng nhập" id="tenDN" name="username" required >
-                                    
-                                    
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Mật khẩu" id="mk" name="password" required>
-                                 
-                                </div>
-                                </div>
-          
-                          
-                            <div class="modal-footer">               
-                                <a href="#" data-toggle="modal" data-target="#myModalQuenMK" data-dismiss="modal" id="quenMK"  style="margin-right:310px;">Quên mật khẩu</a>                      
-                                <button type="button" class="btn btn-secondary" onclick="validateFormDNhap()"><i class="fa fa-arrow-right"></i></button>
-                            </div>
-    
-                        </div>
-                    </div>
-            
-                        
-    </div>
 
 
 		<!-- form DangNhap DangKy -->
@@ -157,7 +117,7 @@
 
 		<div class="container">
 
-			<form action="/FastFood/AccountServlet" method="post">
+			<!-- <form action="/FastFood/AccountServlet" method="post">
 				<div class="modal fade" id="myModal">
 
 					<div class="modal-dialog modal-dialog-centered ">
@@ -185,7 +145,7 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="fa fa-lock"></i></span>
 									</div>
-									<input type="text" class="form-control" placeholder="Mật khẩu"
+									<input type="password" class="form-control" placeholder="Mật khẩu"
 										id="mK" name="mK" required>
 
 								</div>
@@ -207,7 +167,7 @@
 
 				</div>
 
-			</form>
+			</form> -->
 			<!-- ddawng kys nek  -->
 
 			<form action="/FastFood/KhachHangServlet/insert" method="post">

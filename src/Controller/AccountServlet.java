@@ -11,11 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 import DAO.accountDAO;
 import Model.ACCOUNT;
-
 
 @WebServlet("/AccountServlet")
 public class AccountServlet extends HttpServlet {
@@ -38,32 +35,44 @@ public class AccountServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ACCOUNT acc=new ACCOUNT();
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		ACCOUNT acc = new ACCOUNT();
+		String ad;
 		try {
-			acc=accDAO.Login(request.getParameter("tenDN"), request.getParameter("mK"));
-			if(acc!=null) {
+			acc = accDAO.Login(request.getParameter("tenDN"), request.getParameter("mK"));
+
+			if (acc != null && acc.getQuyenHan().equals("admin")) {
 				request.setAttribute("acc", acc);
-				response.sendRedirect("/FastFood/AdminQLSP.jsp");
-			}else {
-				System.out.println("LOI");
-				
+				response.sendRedirect("/FastFood/SanPhamServlet");
+			}
+			if (acc != null && acc.getQuyenHan().equals("user")) {
 				response.sendRedirect("/FastFood/TrangChu.jsp");
 			}
-		} catch (SQLException e) {
+			if (acc == null) {
+				request.setAttribute("error", "Sai ten dang nhap hoac pass");
+				response.sendRedirect("/FastFood/Login.jsp");
+			}
+			request.setAttribute("account",acc);
+
+		} catch (
+
+		SQLException e) {
 			e.printStackTrace();
 			request.setAttribute("loi", e.toString());
 		}
 
-		/*RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/TrangChu.jsp");*/
-		
+		/*
+		 * RequestDispatcher dispatcher =
+		 * getServletContext().getRequestDispatcher("/TrangChu.jsp");
+		 */
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
-		
-	}
 
-	
+	}
 
 }
