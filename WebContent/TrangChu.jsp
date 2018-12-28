@@ -101,10 +101,16 @@
 			<%
 				}
 			%> --%>
+			
 			<c:if test="${tenDN!=null}">
-				<p>
-					Username :<strong><c:if test="${tenDN}">
-						</c:if> </strong>
+
+				
+					<%-- Username :<strong><c:if test="${tenDN}">
+						</c:if> </strong> --%>
+
+				<p>				
+				Username :<strong><%=session.getAttribute("tenDN")%></strong>
+
 				</p>
 			</c:if>
 			<c:if test="${tenDN==null}">
