@@ -12,7 +12,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./css/style.css" media="screen">
+<link rel="stylesheet" href="./css/style1.css" media="screen">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
@@ -66,14 +66,15 @@
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thực
 								đơn</a> <!-- <a class="nav-link"  href="ThucDon.html">Thực đơn</a> -->
 							<div class="dropdown-menu" aria-labelledby="dropdownId">
-								<a class="dropdown-item" href="Ga.html">Gà rán + Gà quay</a> <a
+								<a class="dropdown-item" href="/FastFood/ThucDon">**</a> <a
+									class="dropdown-item" href="Ga.html">Gà rán + Gà quay</a> <a
 									class="dropdown-item" href="Hamburger.html">Hamburger</a> <a
 									class="dropdown-item" href="DoAnNhe.html">Đồ ăn nhẹ</a> <a
 									class="dropdown-item" href="TrangMieng_ThucUong.html">Tráng
 									miệng + Thức uống</a>
 							</div></li>
-						<li class="nav-item"><a class="nav-link" href="KhuyenMai.jsp">Khuyến
-								mãi </a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="TinKMServlet/showKM">Khuyến mãi </a></li>
 						<li class="nav-item"><a class="nav-link" href="TinTuc.jsp">Tin
 								tức </a></li>
 					</ul>
@@ -86,7 +87,7 @@
 			</nav>
 		</div>
 
-		
+
 		<div class="checkdki-dn ml-auto">
 			<%-- <a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i> Đăng
 				Nhập</a> | <a href="#" data-toggle="modal" data-target="#myModal1"
@@ -101,15 +102,16 @@
 				}
 			%> --%>
 			<c:if test="${tenDN!=null}">
-				<p>				
-				Username :<strong><c:if test="${tenDN}"> </c:if> </strong>	
+				<p>
+					Username :<strong><c:if test="${tenDN}">
+						</c:if> </strong>
 				</p>
 			</c:if>
 			<c:if test="${tenDN==null}">
-				
-					<a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i> Đăng
-				Nhập</a> | <a href="#" data-toggle="modal" data-target="#myModal1"
-				id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
+
+				<a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i>
+					Đăng Nhập</a> | <a href="#" data-toggle="modal" data-target="#myModal1"
+					id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
 				</p>
 			</c:if>
 		</div>
