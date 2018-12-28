@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./css/style.css" media="screen">
+<link rel="stylesheet" href="./css/style1.css" media="screen">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
@@ -355,7 +355,8 @@
 									</div> --%>
 									<p></p>
 									<div>
-										<a href="#" class="btn btn-primary">ĐẶT MUA</a>
+										<a href="/FastFood/GioHangServlet?maSP=<c:out value="${SP.getMaSP()}" />" class="btn btn-primary">ĐẶT MUA</a>
+										
 									</div>
 								</div>
 							</div>

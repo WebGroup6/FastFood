@@ -49,7 +49,7 @@
 					id="collapsibleNavId"
 					style="margin-top: 80px; margin-right: -15px;">
 					<ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
-						<li class="nav-item"><a class="nav-link" href="TrangChu.jsp">Trang
+						<li class="nav-item"><a class="nav-link" href="/FastFood/./TrangChu.jsp">Trang
 								chủ</a></li>
 
 
@@ -66,7 +66,7 @@
 							</div></li>
 						<li class="nav-item main_page"><a class="nav-link"
 							href="TinKMServlet/showKM">Khuyến mãi </a></li>
-						<li class="nav-item"><a class="nav-link" href="TinTuc.jsp">Tin
+						<li class="nav-item"><a class="nav-link" href="/FastFood/./TinTuc.jsp">Tin
 								tức </a></li>
 					</ul>
 

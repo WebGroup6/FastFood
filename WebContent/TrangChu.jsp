@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./css/style.css" media="screen">
+<link rel="stylesheet" href="./css/style1.css" media="screen">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
@@ -24,7 +24,7 @@
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <%
 	ACCOUNT acc = (ACCOUNT) session.getAttribute("tenDN");
-%>>
+%>
 
 </head>
 <body>
@@ -64,13 +64,14 @@
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thực
 								đơn</a> <!-- <a class="nav-link"  href="ThucDon.html">Thực đơn</a> -->
 							<div class="dropdown-menu" aria-labelledby="dropdownId">
+							<a class="dropdown-item" href="/FastFood/ThucDon">Default</a>
 								<a class="dropdown-item" href="Ga.html">Gà rán + Gà quay</a> <a
 									class="dropdown-item" href="Hamburger.html">Hamburger</a> <a
 									class="dropdown-item" href="DoAnNhe.html">Đồ ăn nhẹ</a> <a
 									class="dropdown-item" href="TrangMieng_ThucUong.html">Tráng
 									miệng + Thức uống</a>
 							</div></li>
-						<li class="nav-item"><a class="nav-link" href="KhuyenMai.jsp">Khuyến
+						<li class="nav-item"><a class="nav-link" href="/FastFood/TinKMServlet/showKM">Khuyến
 								mãi </a></li>
 						<li class="nav-item"><a class="nav-link" href="TinTuc.jsp">Tin
 								tức </a></li>
