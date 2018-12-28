@@ -114,7 +114,7 @@ public class accountDAO {
 	public ACCOUNT Login(String username, String password) throws SQLException {
 		ACCOUNT ac=null;
 		
-		String sql = "select * from ACCOUNT where TENDN='" + username + "' and MK='" + password + "'";
+		String sql = "select * from ACCOUNT where TenDN='" + username + "' and MK='" + password + "'";
 		
 		connect();
 

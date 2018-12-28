@@ -42,11 +42,11 @@ public class AccountServlet extends HttpServlet {
 		try {
 			acc = accDAO.Login(request.getParameter("tenDN"), request.getParameter("mK"));
 
-			if (acc != null && acc.getQuyenHan().equals("admin")) {
+			if (acc != null && acc.getQuyenHan().equals("Admin")) {
 				request.setAttribute("acc", acc);
 				response.sendRedirect("/FastFood/SanPhamServlet");
 			}
-			if (acc != null && acc.getQuyenHan().equals("user")) {
+			if (acc != null && acc.getQuyenHan().equals("User")) {
 				response.sendRedirect("/FastFood/TrangChu.jsp");
 			}
 			if (acc == null) {
