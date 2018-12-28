@@ -5,14 +5,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import DAO.accountDAO;
 import Model.ACCOUNT;
+import javafx.scene.control.Alert;
 
 @WebServlet("/AccountServlet")
 public class AccountServlet extends HttpServlet {
@@ -38,20 +39,28 @@ public class AccountServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		ACCOUNT acc = new ACCOUNT();
-		String ad;
+		HttpSession session = request.getSession();
+		
 		try {
 			acc = accDAO.Login(request.getParameter("tenDN"), request.getParameter("mK"));
 
 			if (acc != null && acc.getQuyenHan().equals("Admin")) {
-				request.setAttribute("acc", acc);
-				response.sendRedirect("/FastFood/SanPhamServlet");
+
+				
+				session.setAttribute("acc", acc);
+				
+				/*session.setAttribute("tenDN", tenDN);
+				session.setAttribute("mK", mK);*/
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/SanPhamServlet");
+				dispatcher.forward(request, response);
 			}
 			if (acc != null && acc.getQuyenHan().equals("User")) {
-				response.sendRedirect("/FastFood/TrangChu.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/TrangChu.jsp");
+				dispatcher.forward(request, response);
+
 			}
 			if (acc == null) {
-				request.setAttribute("error", "Sai ten dang nhap hoac pass");
-				response.sendRedirect("/FastFood/Login.jsp");
+				response.sendRedirect(request.getContextPath()+"/Login.jsp?error=0");
 			}
 			request.setAttribute("account",acc);
 
