@@ -34,12 +34,17 @@
 		<div class="row">
 			<div class="col-6 mx-auto">
 				<h1 class="display-4 text-center ">Login</h1>
-				<form action="AccountServlet" method="post">
-				<% if(request.getParameter("error")!=null) {%>
+				<%
+					if (request.getParameter("error") != null) {
+						out.print("<p style='color:red'>Sai tên đăng nhập hoặc mật khẩu </p>");
+					}
+				%>
+				<form id="form_login" action="AccountServlet" method="post">
+					<%-- <% if(request.getParameter("error")!=null) {%>
 				<div>
 				<p style="color:red"><%=request.getParameter("error") %></p>
-				</div><%} %>
-				
+				</div><%} %> --%>
+
 					<div class="login">
 
 						<div class="input-group mb-3"
@@ -59,6 +64,7 @@
 								placeholder="Mật khẩu" id="mK" name="mK" required>
 
 						</div>
+
 						<div class="form-group text-center">
 							<!-- <a href="#" data-toggle="modal" data-target="#myModalQuenMK" data-dismiss="modal" id="quenMK"  style="margin-right:310px;">Quên mật khẩu</a>                       -->
 							<button type="submit" value="Login" class="btn btn-secondary"
@@ -71,6 +77,30 @@
 			</div>
 		</div>
 	</div>
+
+
+	<!-- <script>
+		var inputTenDN= document.getElementById('tenDN');
+		var inputMK=document.getElementById('mK');
+		
+		var formlogin=document.getElementById('form_login');
+		if(formlogin.attachEvent){
+			formlogin.attachEvent('submit',onFormSubmit);
+		}else{
+			formlogin.addEventListener('submit',onFormSubmit);
+		}
+		
+		function onFormSubmit(e){
+			var username=inputTenDN.value;
+			var pass=inputMK.value;
+			
+			if(username== ACCOUNT.getTenDN()&& pass==ACCOUNT.getMK()){
+				alert('Dang nhap thanh cong');
+			}else{
+				alert('that bai');
+			}
+		}
+	</script> -->
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

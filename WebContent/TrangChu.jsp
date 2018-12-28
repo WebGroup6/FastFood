@@ -1,8 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="javax.servlet.http.HttpSession"%>
 <%@ page import="Model.ACCOUNT"%>
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <title>Gin's Chicken</title>
@@ -10,7 +12,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./css/style1.css" media="screen">
+<link rel="stylesheet" href="./css/style.css" media="screen">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
@@ -24,11 +26,7 @@
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <%-- <%
 	ACCOUNT acc = (ACCOUNT) session.getAttribute("tenDN");
-
-%>
-
 %>> --%>
-
 
 </head>
 <body>
@@ -68,14 +66,13 @@
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thực
 								đơn</a> <!-- <a class="nav-link"  href="ThucDon.html">Thực đơn</a> -->
 							<div class="dropdown-menu" aria-labelledby="dropdownId">
-							<a class="dropdown-item" href="/FastFood/ThucDon">Default</a>
 								<a class="dropdown-item" href="Ga.html">Gà rán + Gà quay</a> <a
 									class="dropdown-item" href="Hamburger.html">Hamburger</a> <a
 									class="dropdown-item" href="DoAnNhe.html">Đồ ăn nhẹ</a> <a
 									class="dropdown-item" href="TrangMieng_ThucUong.html">Tráng
 									miệng + Thức uống</a>
 							</div></li>
-						<li class="nav-item"><a class="nav-link" href="/FastFood/TinKMServlet/showKM">Khuyến
+						<li class="nav-item"><a class="nav-link" href="KhuyenMai.jsp">Khuyến
 								mãi </a></li>
 						<li class="nav-item"><a class="nav-link" href="TinTuc.jsp">Tin
 								tức </a></li>
@@ -89,27 +86,32 @@
 			</nav>
 		</div>
 
-		<%-- <% if (acc != null) {
-					out.print("Xin chao");
-					out.print(acc.getTenDN());
-				}
 		
-		%> --%>
 		<div class="checkdki-dn ml-auto">
-			<a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i> Đăng Nhập</a> | 
-			<a href="#" data-toggle="modal" data-target="#myModal1"
+			<%-- <a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i> Đăng
+				Nhập</a> | <a href="#" data-toggle="modal" data-target="#myModal1"
 				id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
 			<%
-				if (session.getAttribute("tenDN")!= null) {
+				if (session.getAttribute("tenDN") != null) {
 			%>
 			<p>
 				Username :<strong><%=session.getAttribute("tenDN")%></strong>
 			</p>
 			<%
 				}
-			%>
-
-
+			%> --%>
+			<c:if test="${tenDN!=null}">
+				<p>				
+				Username :<strong><c:if test="${tenDN}"> </c:if> </strong>	
+				</p>
+			</c:if>
+			<c:if test="${tenDN==null}">
+				
+					<a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i> Đăng
+				Nhập</a> | <a href="#" data-toggle="modal" data-target="#myModal1"
+				id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
+				</p>
+			</c:if>
 		</div>
 
 		<div class="hotline">

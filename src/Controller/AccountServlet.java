@@ -39,31 +39,33 @@ public class AccountServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		ACCOUNT acc = new ACCOUNT();
+		String tenDN=request.getParameter("tenDN");
+		String mK=request.getParameter("mK");
+		
 		HttpSession session = request.getSession();
 		
 		try {
 			acc = accDAO.Login(request.getParameter("tenDN"), request.getParameter("mK"));
 
 			if (acc != null && acc.getQuyenHan().equals("Admin")) {
-
+				/*
+				*/
+				
 				
 				session.setAttribute("acc", acc);
-				
-				/*session.setAttribute("tenDN", tenDN);
-				session.setAttribute("mK", mK);*/
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/SanPhamServlet");
 				dispatcher.forward(request, response);
 			}
 			if (acc != null && acc.getQuyenHan().equals("User")) {
+				session.setAttribute("tenDN", tenDN);
+				session.setAttribute("mK", mK);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/TrangChu.jsp");
 				dispatcher.forward(request, response);
-
 			}
 			if (acc == null) {
 				response.sendRedirect(request.getContextPath()+"/Login.jsp?error=0");
 			}
-			request.setAttribute("account",acc);
-
+			
 		} catch (
 
 		SQLException e) {
