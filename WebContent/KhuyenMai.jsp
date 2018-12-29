@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="javax.servlet.http.HttpSession"%>
+<%@ page import="Model.ACCOUNT"%>
 
+<%@page import="DAO.GioHangDAO"%>
+<%@page import="Model.Cart"%>
+<%@page import="java.util.ArrayList"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -80,10 +85,21 @@
 
 
 		<div class="checkdki-dn ml-auto">
-			<a href="#" data-toggle="modal" data-target="#myModal" id="dangNhap"><i
-				class="fa fa-user"></i> Đăng Nhập</a> | <a href="#" data-toggle="modal"
-				data-target="#myModal1" id="dangKy"><i class="fa fa-pencil"></i>
-				Đăng Ký</a>
+
+			<c:if test="${tenDN!=null}">
+				<p>
+					Hello <strong><%=session.getAttribute("tenDN")%></strong> | <a
+						href="/FastFood/LogoutServlet"><i class="fa fa-pencil"></i>
+						Đăng Xuất</a>
+				</p>
+			</c:if>
+			<c:if test="${tenDN==null}">
+
+				<a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i>
+					Đăng Nhập</a> | <a href="#" data-toggle="modal" data-target="#myModal1"
+					id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
+				</p>
+			</c:if>
 		</div>
 
 
@@ -91,9 +107,16 @@
 			<i class="fa fa-phone-square"> 1800-XXXX</i>
 		</div>
 
+		<%
+			Cart cart = (Cart) session.getAttribute("cart");
+			if (cart == null) {
+				cart = new Cart();
+				session.setAttribute("cart", cart);
+			}
+		%>
 		<div class="check_giohang">
-			<a href="KtraGioHang.html"><i class="fa fa-shopping-basket"></i>
-				0 GIỎ HÀNG</a>
+
+			<a href="../KtraGioHang.jsp"><i class="fa fa-shopping-basket"></i> <%=cart.countItem()%></a>
 		</div>
 
 		<!-- form DangNhap DangKy -->

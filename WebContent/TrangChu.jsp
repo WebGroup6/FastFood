@@ -3,16 +3,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 <%@ page import="Model.ACCOUNT"%>
+
+
+<%@page import="DAO.GioHangDAO"%>
+<%@page import="Model.Cart"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
 <title>Gin's Chicken</title>
+<link rel="shortcut icon" type="image/png" href="./img/logo1.png" />
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./css/style.css" media="screen">
+<link rel="stylesheet" href="./css/style1.css" media="screen">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
@@ -59,20 +65,22 @@
 							<!-- <a class="nav-link"  href="TrangChu.html">Trang chủ <span class="sr-only">(current)</span></a>                                                       -->
 							<a class="nav-link" href="TrangChu.jsp">Trang chủ</a>
 						</li>
+						<li class="nav-item"><a class="nav-link"
+							href="/FastFood/ThucDon">Thực đơn </a></li>
 
-
-						<li class="nav-item dropdown"><a
+						<!-- <li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#" id="dropdownId"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thực
-								đơn</a> <!-- <a class="nav-link"  href="ThucDon.html">Thực đơn</a> -->
+								đơn</a> <a class="nav-link"  href="ThucDon.html">Thực đơn</a>
 							<div class="dropdown-menu" aria-labelledby="dropdownId">
-								<a class="dropdown-item" href="Ga.html">Gà rán + Gà quay</a> <a
+								<a class="dropdown-item" href="/FastFood/ThucDon">**</a> <a
+									class="dropdown-item" href="Ga.html">Gà rán + Gà quay</a> <a
 									class="dropdown-item" href="Hamburger.html">Hamburger</a> <a
 									class="dropdown-item" href="DoAnNhe.html">Đồ ăn nhẹ</a> <a
 									class="dropdown-item" href="TrangMieng_ThucUong.html">Tráng
 									miệng + Thức uống</a>
-							</div></li>
-						<li class="nav-item"><a class="nav-link" href="KhuyenMai.jsp">Khuyến
+							</div></li> -->
+						<li class="nav-item"><a class="nav-link" href="/FastFood/TinKMServlet/showKM">Khuyến
 								mãi </a></li>
 						<li class="nav-item"><a class="nav-link" href="TinTuc.jsp">Tin
 								tức </a></li>
@@ -86,20 +94,21 @@
 			</nav>
 		</div>
 
-		
+
 		<div class="checkdki-dn ml-auto">
-			
+
 			<c:if test="${tenDN!=null}">
-				<p>				
-				Hello <strong><%=session.getAttribute("tenDN")%></strong> | 
-				<a href="/FastFood/LogoutServlet" ><i class="fa fa-pencil"></i> Đăng Xuất</a>
+				<p>
+					Hello <strong><%=session.getAttribute("tenDN")%></strong> | <a
+						href="/FastFood/LogoutServlet"><i class="fa fa-pencil"></i>
+						Đăng Xuất</a>
 				</p>
 			</c:if>
 			<c:if test="${tenDN==null}">
-				
-					<a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i> Đăng
-				Nhập</a> | <a href="#" data-toggle="modal" data-target="#myModal1"
-				id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
+
+				<a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i>
+					Đăng Nhập</a> | <a href="#" data-toggle="modal" data-target="#myModal1"
+					id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
 				</p>
 			</c:if>
 		</div>
@@ -108,11 +117,22 @@
 			<i class="fa fa-phone-square"> 1800-XXXX</i>
 		</div>
 
-		<div class="check_giohang">
+		<!-- <div class="check_giohang">
 			<a href="KtraGioHang.html"><i class="fa fa-shopping-basket"></i>
 				0 GIỎ HÀNG</a>
-		</div>
+		</div> -->
+		<%
+			Cart cart = (Cart) session.getAttribute("cart");
+			if (cart == null) {
+				cart = new Cart();
+				session.setAttribute("cart", cart);
+			}
+		%>
+		<div class="check_giohang">
 
+			<a href="KtraGioHang.jsp"><i class="fa fa-shopping-basket"></i> <%=cart.countItem()%>
+			</a>
+		</div>
 
 
 

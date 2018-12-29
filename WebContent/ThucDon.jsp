@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
 <title>Gin's Chicken</title>
+<link rel="shortcut icon" type="image/png" href="../img/logo1.png" />
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"

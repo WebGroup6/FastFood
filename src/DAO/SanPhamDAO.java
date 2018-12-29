@@ -19,6 +19,9 @@ public class SanPhamDAO {
 		this.jdbcURL = jdbcURL;
 	}
 
+	public SanPhamDAO()
+	{}
+	
 	protected void connect() throws SQLException {
 		if (jdbcConnection == null || jdbcConnection.isClosed()) {
 			try {

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import Model.Cart;
 import Model.Item;
 import Model.SanPham;
+
 import DAO.SanPhamDAO;
 
 @WebServlet("/CartServlet")
@@ -22,7 +23,11 @@ public class CartServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    public void init() {
+		String jdbcURL = getServletContext().getInitParameter("jdbcURL");
+		spDAO = new SanPhamDAO(jdbcURL);
 
+	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -32,11 +37,12 @@ public class CartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		String command=request.getParameter("command");
-		String maSP=request.getParameter("MaSP");
+		String maSP=request.getParameter("maSP");
 		Cart cart=(Cart) session.getAttribute("cart");
+		SanPham sp=new SanPham();
 		
 		try {
-			SanPham sp= spDAO.getSP(maSP);
+			sp= spDAO.getSP(maSP);
 			switch (command) {
 			case "plus":
 				if(cart.getCartItems().containsKey(cart))
@@ -44,10 +50,13 @@ public class CartServlet extends HttpServlet {
 					cart.plustoCart(maSP, new Item(sp, cart.getCartItems().get(maSP).getQuantity()));
 				}
 				else {
-					cart.plustoCart(maSP, new Item(sp,1));
+					cart.plustoCart(maSP, new Item(sp,1));		
+					
 				}
 				break;
-
+			case "remove":
+				cart.removeCart(maSP);
+				break;
 		
 			}
 			

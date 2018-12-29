@@ -16,16 +16,15 @@ import Model.HoaDon;
 public class HoaDonDAO {
 
 	private String jdbcURL;
-    private String jdbcUsername;
-    private String jdbcPassword;
+    
     private Connection jdbcConnection;
      
-    public HoaDonDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+    public HoaDonDAO(String jdbcURL) {
         this.jdbcURL = jdbcURL;
-        this.jdbcUsername = jdbcUsername;
-        this.jdbcPassword = jdbcPassword;
+     
     }
      
+    
     protected void connect() throws SQLException {
         if (jdbcConnection == null || jdbcConnection.isClosed()) {
             try {
@@ -34,7 +33,7 @@ public class HoaDonDAO {
                 throw new SQLException(e);
             }
             jdbcConnection = DriverManager.getConnection(
-                                        jdbcURL, jdbcUsername, jdbcPassword);
+                                        jdbcURL);
            
         }
     }
@@ -125,8 +124,7 @@ public class HoaDonDAO {
          
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
         statement.setString(1,hd.getMaHD());
-       /* statement.setString(2, hd.getMaKH());
-        statement.setString(3, hd.getMaNV());*/
+
          
         boolean rowDeleted = statement.executeUpdate() > 0;
         statement.close();
@@ -138,7 +136,7 @@ public class HoaDonDAO {
      
     public HoaDon getHoaDon(String MaHD) throws SQLException {
     	HoaDon hd = null;
-        String sql = "SELECT * FROM HOADON WHERE MAHD = ?";
+        String sql = "SELECT * FROM HOADON WHERE MaHD = ?";
          
         connect();
          
@@ -148,15 +146,23 @@ public class HoaDonDAO {
         ResultSet resultSet = statement.executeQuery();
          
         if (resultSet.next()) {
+        	 hd=new HoaDon();
+        
+        	 hd.setMaHD(resultSet.getString("MaHD"));
+        	 hd.setMaKH(resultSet.getString("MaKH"));
+        	 hd.setMaNV(resultSet.getString("MaNV"));
+        	 hd.setTongTien(resultSet.getInt("TongTien"));
+        	 hd.setNgayLap(resultSet.getDate("NgayLap"));
+        	 hd.setTrangThai(resultSet.getInt("TrangThai"));
         	 
-             String MaKH=resultSet.getString("MaKH");
+          /*   String MaKH=resultSet.getString("MaKH");
              String MaNV = resultSet.getString("MaNV");
              
              int TongTien=resultSet.getInt("TongTien");
              Date NgayLap=resultSet.getDate("NgayLap");
              int TrangThai=resultSet.getInt("TrangThai");
              
-            hd = new HoaDon(MaHD,MaKH,MaNV,TongTien,NgayLap,TrangThai);
+            hd = new HoaDon(MaHD,MaKH,MaNV,TongTien,NgayLap,TrangThai);*/
         }
          
         resultSet.close();

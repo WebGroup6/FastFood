@@ -29,10 +29,9 @@ public class HoaDonServlet extends HttpServlet {
 
 	public void init() {
 		String jdbcURL = getServletContext().getInitParameter("jdbcURL");
-		String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
-		String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
+		
 
-		hdDAO = new HoaDonDAO(jdbcURL, jdbcUsername, jdbcPassword);
+		hdDAO = new HoaDonDAO(jdbcURL);
 
 	}
 
