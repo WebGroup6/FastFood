@@ -13,8 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import DAO.CT_HoaDonDAO;
 import DAO.HoaDonDAO;
-import DAO.LoaiSPDAO;
-import DAO.SanPhamDAO;
+
 import Model.Cart;
 import Model.ChiTietHoaDon;
 import Model.HoaDon;
@@ -48,15 +47,15 @@ public class CheckOutServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session=request.getSession();
-		
+		Date date=new Date();
 		Cart cart=(Cart) session.getAttribute("cart");
 		try {
 			HoaDon hd=new HoaDon();
 			hd.setMaHD("HD012");
 
-			hd.setNgayLap(new Date());
+			hd.setNgayLap(date);
 			hd.setTongTien(cart.totalCart());
-			
+			hdDAO.insertHD(hd);
 			int thanhtien=0;
 			for(Map.Entry<String, Item> list:cart.getCartItems().entrySet())
 			{
@@ -70,7 +69,8 @@ public class CheckOutServlet extends HttpServlet {
 		} catch (Exception e) {
 			
 		}
-
+		cart =new Cart();
+		session.setAttribute("cart", cart);
 		response.sendRedirect("/FastFood/TrangChu.jsp");
 	}
 

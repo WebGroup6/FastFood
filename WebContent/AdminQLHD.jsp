@@ -65,9 +65,9 @@
 						<p>Bạn có muốn thoát không?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
-							onclick="AgreeExit()">Có</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+						<a href="TrangChu.jsp" class="btn btn-primary"> Có</a>
+						<button type="button" class="btn btn-default"
+							data-dismiss="modal">Không</button>
 					</div>
 				</div>
 			</div>

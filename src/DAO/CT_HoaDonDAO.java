@@ -60,7 +60,7 @@ public class CT_HoaDonDAO {
         
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
-        
+        disconnect();
         return rowInserted;
     }
 

@@ -80,8 +80,8 @@
 									class="dropdown-item" href="TrangMieng_ThucUong.html">Tráng
 									miệng + Thức uống</a>
 							</div></li> -->
-						<li class="nav-item"><a class="nav-link" href="/FastFood/TinKMServlet/showKM">Khuyến
-								mãi </a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/FastFood/TinKMServlet/showKM">Khuyến mãi </a></li>
 						<li class="nav-item"><a class="nav-link" href="TinTuc.jsp">Tin
 								tức </a></li>
 					</ul>
@@ -130,8 +130,8 @@
 		%>
 		<div class="check_giohang">
 
-			<a href="KtraGioHang.jsp"><i class="fa fa-shopping-basket"></i> <%=cart.countItem()%>  GIỎ HÀNG
-			</a>
+			<a href="KtraGioHang.jsp"><i class="fa fa-shopping-basket"></i> <%=cart.countItem()%>
+				GIỎ HÀNG </a>
 		</div>
 
 
@@ -238,9 +238,28 @@
 								</div>
 								<div class="form-group">
 									<input id="MKnhaplai" name="mK" class="form-control"
-										placeholder="Nhập lại Mật khẩu" required>
+									onchange="ktra()"	placeholder="Nhập lại Mật khẩu" required>
 								</div>
-
+								<script type="text/javascript">
+									function ktra() {
+										var MK = document
+												.getElementById("MK").value;
+										var MKnhaplai = document
+												.getElementById("MKnhaplai").value;
+										if(MK!=MKnhaplai)
+											{alert('Mật khẩu không đúng');}
+										
+										var hovaten=document.getElementById('hoTen').value;
+									    var sdt=document.getElementById('sDt').value;
+									    var dchi=document.getElementById('DChi').value;
+									    var mail=document.getElementById('eMail').value;									   
+									    var username = document.getElementById('tenDn').value;
+									
+									    if(hovaten.length==0 || sdt.length==0 ||dchi.length==0 || mail.length==0 || username.length==0 ){
+									        alert('Vui lòng nhập đầy đủ thông tin đăng ký');
+									    }
+									}
+								</script>
 
 
 							</div>

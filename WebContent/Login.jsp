@@ -65,14 +65,17 @@
 								placeholder="Mật khẩu" id="mK" name="mK" required>
 
 						</div>
-
+			
+							
+				
 						<div class="form-group text-center">
 							<!-- <a href="#" data-toggle="modal" data-target="#myModalQuenMK" data-dismiss="modal" id="quenMK"  style="margin-right:310px;">Quên mật khẩu</a>                       -->
 							<button type="submit" value="Login" class="btn btn-secondary"
 								onclick="validateFormDNhap()">
 								<i class="fa fa-arrow-right"></i>
 							</button>
-						</div>
+							
+						</div><a href="#" style="color:crimson; margin-left:80px; font-size: 20px">Quên Mật khẩu</a>
 					</div>
 				</form>
 			</div>

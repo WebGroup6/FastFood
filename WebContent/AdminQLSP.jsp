@@ -141,7 +141,7 @@
 								<a class="btn btn-warning" href="LoaiSPServlet">Loại sản
 									phẩm </a>
 								<!--    -->
-								<select class="form_input" onchange="this.form.submit()"
+								<select class="btn btn-success dropdown-toggle" onchange="this.form.submit()"
 									name="selectLoaiSP" id="selectLoaiSP">
 									<c:forEach var="loaiSP" items="${listLoaiSP}">
 										<option value="${loaiSP.getMaLoai()}">
@@ -152,7 +152,7 @@
 								<script type="text/javascript">
 									document.getElementById("selectLoaiSP").value = "${selectLoaiSP}";
 								</script>
-								<select class="form_input" onchange="this.form.submit()"
+								<select class="btn dropdown-toggle" onchange="this.form.submit()"
 									name="sort" id="sort">
 									<option value="AZ">A-Z</option>
 									<option value="ZA">Z-A</option>

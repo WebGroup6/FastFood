@@ -58,17 +58,8 @@
 								chủ</a></li>
 
 
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#" id="dropdownId"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Thực
-								đơn</a> <!-- <a class="nav-link"  href="ThucDon.html">Thực đơn</a> -->
-							<div class="dropdown-menu" aria-labelledby="dropdownId">
-								<a class="dropdown-item" href="Ga.html">Gà rán + Gà quay</a> <a
-									class="dropdown-item" href="Hamburger.html">Hamburger</a> <a
-									class="dropdown-item" href="DoAnNhe.html">Đồ ăn nhẹ</a> <a
-									class="dropdown-item" href="TrangMieng_ThucUong.html">Tráng
-									miệng + Thức uống</a>
-							</div></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/FastFood/ThucDon">Thực đơn </a></li>
 						<li class="nav-item main_page"><a class="nav-link"
 							href="TinKMServlet/showKM">Khuyến mãi </a></li>
 						<li class="nav-item"><a class="nav-link" href="/FastFood/./TinTuc.jsp">Tin

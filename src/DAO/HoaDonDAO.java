@@ -86,6 +86,7 @@ public class HoaDonDAO {
         statement.setString(2, hd.getMaKH());
         statement.setString(3, hd.getMaNV());
         statement.setInt(4, hd.getTongTien());
+        /*statement.setTimestamp(5, hd.getNgayLap());*/
         statement.setDate(5,  (java.sql.Date) hd.getNgayLap());
         statement.setInt(6, hd.getTrangThai());
         
@@ -93,7 +94,7 @@ public class HoaDonDAO {
         
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
-       
+        disconnect();
         return rowInserted;
     }
     //Sửa hóa đơn
