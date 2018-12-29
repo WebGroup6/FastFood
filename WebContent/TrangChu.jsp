@@ -130,7 +130,7 @@
 		%>
 		<div class="check_giohang">
 
-			<a href="KtraGioHang.jsp"><i class="fa fa-shopping-basket"></i> <%=cart.countItem()%>
+			<a href="KtraGioHang.jsp"><i class="fa fa-shopping-basket"></i> <%=cart.countItem()%>  GIỎ HÀNG
 			</a>
 		</div>
 
@@ -391,7 +391,7 @@
 								<h4 class="card-title" style="margin-bottom: 40px;">Burger
 									Gà</h4>
 								<p class="card-text">Giá : 30.000đ</p>
-								<a href="#" class="btn btn-primary">ĐẶT MUA</a>
+								<a href="/FastFood/ThucDon" class="btn btn-primary">MÓN KHÁC</a>
 							</div>
 						</div>
 					</div>
@@ -401,7 +401,7 @@
 							<div class="card-body">
 								<h4 class="card-title">Combo gà giòn cay(3 miếng)</h4>
 								<p class="card-text">Giá : 85.000đ</p>
-								<a href="#" class="btn btn-primary">ĐẶT MUA</a>
+								<a href="/FastFood/ThucDon" class="btn btn-primary">MÓN KHÁC</a>
 							</div>
 						</div>
 					</div>
@@ -413,7 +413,7 @@
 							<div class="card-body">
 								<h4 class="card-title">Combo gà sốt cam (6 miếng)</h4>
 								<p class="card-text">Giá : 160.000đ</p>
-								<a href="#" class="btn btn-primary">ĐẶT MUA</a>
+								<a href="/FastFood/ThucDon" class="btn btn-primary">MÓN KHÁC</a>
 							</div>
 						</div>
 					</div>

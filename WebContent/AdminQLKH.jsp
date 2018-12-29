@@ -30,12 +30,11 @@
 
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
-			<div id="Admin">
-				<a href="Admin_Profile.html" class="btn btn-default btn-sm"> <span
-					class="glyphicon glyphicon-user"></span> Thông tin cá nhân
-				</a>
-				<button data-toggle="modal" data-target="#myModalExit"
-					class="btn btn-default btn-sm">
+			<div id="header-btn">
+
+
+				<button type="button" class="btn btn-default btn-sm"
+					data-toggle="modal" data-target="#myModalExit">
 					<span class="glyphicon glyphicon-log-out"></span> Log out
 				</button>
 
@@ -67,7 +66,7 @@
 						<p>Bạn có muốn thoát không?</p>
 					</div>
 					<div class="modal-footer">
-						<a href="TrangChu.html" class="btn btn-primary"> Có</a>
+						<a href="TrangChu.jsp" class="btn btn-primary"> Có</a>
 						<button type="button" class="btn btn-default"
 							data-dismiss="modal">Không</button>
 					</div>
@@ -81,7 +80,7 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 				<!--left bar-->
 				<ul class="nav nav-sidebar">
-					<li><a href="">Thống Kê</a></li>
+					<!-- <li><a href="">Thống Kê</a></li> -->
 					<li><a href="KhachHangServlet">Khách hàng</a></li>
 					<li><a href="NhanVienServlet">Nhân viên</a></li>
 					<li><a href="LoaiSPServlet">Loại sản phẩm</a></li>
@@ -96,7 +95,7 @@
 				</div>
 
 				<!--Tìm kiếm-->
-				<div class="col-search">
+				<!-- <div class="col-search">
 					<div class="search">
 						<h4>
 							Tìm kiếm theo: <select class="selectSearch" name="browser">
@@ -113,7 +112,7 @@
                             <button class="btn btn-default btnSearch" type="button"><span class="glyphicon glyphicon-search"></span></button>
                         </span>
                     </div>
-				</div>
+				</div> -->
 				<div class="table-responsive">
 					<table class="table table-bordered over"">
 

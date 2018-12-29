@@ -315,7 +315,7 @@ public class SanPhamServlet extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("loi", e.toString());
 		}
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/test.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ThucDon.jsp");
 		dispatcher.forward(request, response);
 	}
 	

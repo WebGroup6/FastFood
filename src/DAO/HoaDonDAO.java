@@ -93,7 +93,7 @@ public class HoaDonDAO {
         
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
-        disconnect();
+       
         return rowInserted;
     }
     //Sửa hóa đơn

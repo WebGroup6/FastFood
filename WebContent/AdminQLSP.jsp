@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="javax.servlet.http.HttpSession"%>
+<%@ page import="Model.ACCOUNT"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,15 +40,16 @@
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div id="header-btn">
-				<a href="Admin_Profile.jsp">
+				<!-- <a href="Admin_Profile.jsp">
 					<button type="button" class="btn btn-default btn-sm">
 						<span class="glyphicon glyphicon-user"></span> Thông tin cá nhân
 					</button>
-				</a> <a href="">
-					<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-log-out"></span> Log out
-					</button>
-				</a>
+				</a>  -->
+				
+				<button type="button" class="btn btn-default btn-sm"
+					data-toggle="modal" data-target="#myModalExit">
+					<span class="glyphicon glyphicon-log-out"></span> Log out
+				</button>
 			</div>
 			<div id="img">
 				<c:if test="${sanPham == null }">
@@ -63,6 +67,31 @@
 			</div>
 		</div>
 	</div>
+	
+	<!--Thoat Admin-->
+	<div class="container">
+		<div id="myModalExit" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog-exit" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Thông báo</h4>
+					</div>
+					<div class="modal-body">
+						<p>Bạn có muốn thoát không?</p>
+					</div>
+					<div class="modal-footer">
+						<a href="TrangChu.jsp" class="btn btn-primary"> Có</a>
+						<button type="button" class="btn btn-default"
+							data-dismiss="modal">Không</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<div class="trang">
@@ -74,7 +103,7 @@
 				<div class="nav-collapse sidebar">
 					<!--left bar-->
 					<ul class="nav nav-sidebar">
-						<li><a href="">Thống Kê</a></li>
+						<!-- <li><a href="">Thống Kê</a></li> -->
 						<li><a href="KhachHangServlet">Khách hàng</a></li>
 						<li><a href="NhanVienServlet">Nhân viên</a></li>
 						<li><a href="LoaiSPServlet">Loại sản phẩm</a></li>

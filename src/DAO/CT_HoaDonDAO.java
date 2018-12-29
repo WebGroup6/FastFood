@@ -43,6 +43,7 @@ public class CT_HoaDonDAO {
             jdbcConnection.close();
         }
     }
+    
     public boolean insertCTHD(ChiTietHoaDon cthd) throws SQLException {
         String sql = "INSERT INTO CT_HOADON (MaHD,MaSP,SoLuong,Gia,ThanhTien) VALUES (?,?,?,?,?)";
         connect();
@@ -59,7 +60,7 @@ public class CT_HoaDonDAO {
         
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
-        disconnect();
+        
         return rowInserted;
     }
 

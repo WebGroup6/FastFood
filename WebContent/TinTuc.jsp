@@ -101,7 +101,7 @@
 		%>
 		<div class="check_giohang">
 
-			<a href="KtraGioHang.jsp"><i class="fa fa-shopping-basket"></i> <%=cart.countItem()%>
+			<a href="KtraGioHang.jsp"><i class="fa fa-shopping-basket"></i> <%=cart.countItem()%>  GIỎ HÀNG
 			</a>
 		</div>
 

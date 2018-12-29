@@ -35,12 +35,11 @@
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
-			<div id="Admin">
-				<a href="Admin_Profile.html" class="btn btn-default btn-sm"> <span
-					class="glyphicon glyphicon-user"></span> Thông tin cá nhân
-				</a>
-				<button data-toggle="modal" data-target="#myModalExit"
-					class="btn btn-default btn-sm">
+			<div id="header-btn">
+
+
+				<button type="button" class="btn btn-default btn-sm"
+					data-toggle="modal" data-target="#myModalExit">
 					<span class="glyphicon glyphicon-log-out"></span> Log out
 				</button>
 
@@ -91,7 +90,6 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 				<!--left bar-->
 				<ul class="nav nav-sidebar">
-					<li><a href="">Thống Kê</a></li>
 					<li><a href="KhachHangServlet">Khách hàng</a></li>
 					<li><a href="NhanVienServlet">Nhân viên</a></li>
 					<li><a href="LoaiSPServlet">Loại sản phẩm</a></li>
@@ -108,9 +106,9 @@
 					<table class="table table-bordered">
 
 						<tr>
-							<th>Mã loại</th>
+							<th width="200px">Mã loại</th>
 							<th>Tên loại sản phẩm</th>
-							<th>Lựa chọn</th>
+							<th width="200px">Lựa chọn</th>
 						</tr>
 
 						<c:forEach var="loaisp" items="${listLoaiSP}">
@@ -207,8 +205,7 @@
 										<input type="submit" class="btn btn-success" value="Thêm Mới"></input>
 									</c:if>
 									<c:if test="${loaiSanPham != null }">
-										<input type="submit" class="btn btn-success"
-											value="Sửa"></input>
+										<input type="submit" class="btn btn-success" value="Sửa"></input>
 									</c:if>
 
 								</div>

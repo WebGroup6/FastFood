@@ -38,15 +38,15 @@
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div id="header-btn">
-				<a href="Admin_Profile.jsp">
-					<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-user"></span> Thông tin cá nhân
-					</button>
-				</a> <a href="">
-					<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-log-out"></span> Log out
-					</button>
-				</a>
+				<div id="header-btn">
+
+
+				<button type="button" class="btn btn-default btn-sm"
+					data-toggle="modal" data-target="#myModalExit">
+					<span class="glyphicon glyphicon-log-out"></span> Log out
+				</button>
+
+			</div>
 			</div>
 			<div id="img">
 				<c:if test="${tinKhuyenMai == null }">
@@ -98,13 +98,12 @@
 				<div class="col-sm-3 col-md-2 sidebar">
 					<!--left bar-->
 					<ul class="nav nav-sidebar">
-						<li><a href="">Thống Kê</a></li>
 						<li><a href="KhachHangServlet">Khách hàng</a></li>
-						<li><a href="NhanVienServlet">Nhân viên</a></li>
-						<li><a href="LoaiSPServlet">Loại sản phẩm</a></li>
-						<li><a href="SanPhamServlet">Sản phẩm</a></li>
-						<li><a href="HoaDonServlet">Đơn hàng</a></li>
-						<li><a href="TinKMServlet">Tin khuyến mãi</a></li>
+					<li><a href="NhanVienServlet">Nhân viên</a></li>
+					<li><a href="LoaiSPServlet">Loại sản phẩm</a></li>
+					<li><a href="SanPhamServlet">Sản phẩm</a></li>
+					<li><a href="HoaDonServlet">Đơn hàng</a></li>
+					<li><a href="TinKMServlet">Tin khuyến mãi</a></li>
 					</ul>
 				</div>
 

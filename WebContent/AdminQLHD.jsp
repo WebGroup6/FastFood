@@ -30,16 +30,14 @@
 
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
-			<div id="Admin">
-				<a href="Admin_Profile.jsp">
-					<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-user"></span> Thông tin cá nhân
-					</button>
-				</a> <a href="" data-toggle="modal" data-target="#myModalExit">
-					<button type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon glyphicon-log-out"></span> Log out
-					</button>
-				</a>
+			<div id="header-btn">
+
+
+				<button type="button" class="btn btn-default btn-sm"
+					data-toggle="modal" data-target="#myModalExit">
+					<span class="glyphicon glyphicon-log-out"></span> Log out
+				</button>
+
 			</div>
 			<div id="img">
 				<img src="img/logo1.png" class="d-inline-block align-top"
@@ -79,7 +77,6 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><a href="">Thống Kê</a></li>
 					<li><a href="KhachHangServlet">Khách hàng</a></li>
 					<li><a href="NhanVienServlet">Nhân viên</a></li>
 					<li><a href="LoaiSPServlet">Loại sản phẩm</a></li>
@@ -93,7 +90,7 @@
 					<h1>Danh sách hóa đơn</h1>
 
 				</div>
-				<div class="col-search">
+				<!-- <div class="col-search">
 					<div class="input-group formSearch">
 						<input type="text" class="form-control" placeholder="Search...">
 						<span class="input-group-btn">
@@ -102,7 +99,7 @@
 							</button>
 						</span>
 					</div>
-				</div>
+				</div> -->
 				<div class="table-responsive">
 
 					<table class="table table-bordered">

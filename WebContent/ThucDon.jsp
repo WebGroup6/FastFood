@@ -1,12 +1,22 @@
+<%@page import="Model.GioHang"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
 	pageEncoding="utf-8"%>
+
+<%@ page import="javax.servlet.http.HttpSession"%>
+<%@ page import="Model.ACCOUNT"%>
+
+<%@page import="DAO.GioHangDAO"%>
+<%@page import="Model.Cart"%>
+<%@page import="java.util.ArrayList"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html lang="en">
 <head>
 <title>Gin's Chicken</title>
-<link rel="shortcut icon" type="image/png" href="../img/logo1.png" />
+<link rel="shortcut icon" type="image/png" href="./img/logo1.png" />
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
@@ -46,24 +56,16 @@
 					style="margin-top: 80px; margin-right: -15px;">
 					<ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
 						<li class="nav-item "><a class="nav-link"
-							href="TrangChu.html">Trang chủ</a></li>
+							href="TrangChu.jsp">Trang chủ</a></li>
 
 
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle main_page" href="#"
-							id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false">Thực đơn</a>
+						<li class="nav-item main_page"><a class="nav-link"
+							href="/FastFood/ThucDon">Thực đơn </a></li>
 
-							<div class="dropdown-menu" aria-labelledby="dropdownId">
-								<a class="dropdown-item" href="ThucDon">Gà rán + Gà quay</a> <a
-									class="dropdown-item" href="Hamburger.html">Hamburger</a> <a
-									class="dropdown-item" href="DoAnNhe.html">Đồ ăn nhẹ</a> <a
-									class="dropdown-item" href="TrangMieng_ThucUong.html">Tráng
-									miệng + Thức uống</a>
-							</div></li>
-						<li class="nav-item"><a class="nav-link"
-							href="KhuyenMai.html">Khuyến mãi </a></li>
-						<li class="nav-item"><a class="nav-link" href="TinTuc.html">Tin
+						
+						<li class="nav-item"><a class="nav-link" href="/FastFood/TinKMServlet/showKM">Khuyến
+								mãi </a></li>
+						<li class="nav-item"><a class="nav-link" href="TinTuc.jsp">Tin
 								tức </a></li>
 					</ul>
 
@@ -72,10 +74,21 @@
 		</div>
 
 		<div class="checkdki-dn ml-auto">
-			<a href="#" data-toggle="modal" data-target="#myModal" id="dangNhap"><i
-				class="fa fa-user"></i> Đăng Nhập</a> | <a href="#" data-toggle="modal"
-				data-target="#myModal1" id="dangKy"><i class="fa fa-pencil"></i>
-				Đăng Ký</a>
+
+			<c:if test="${tenDN!=null}">
+				<p>
+					Hello <strong><%=session.getAttribute("tenDN")%></strong> | <a
+						href="/FastFood/LogoutServlet"><i class="fa fa-pencil"></i>
+						Đăng Xuất</a>
+				</p>
+			</c:if>
+			<c:if test="${tenDN==null}">
+
+				<a href="Login.jsp" id="dangNhap"><i class="fa fa-user"></i>
+					Đăng Nhập</a> | <a href="#" data-toggle="modal" data-target="#myModal1"
+					id="dangKy"><i class="fa fa-pencil"></i> Đăng Ký</a>
+				</p>
+			</c:if>
 		</div>
 
 
@@ -83,63 +96,23 @@
 			<i class="fa fa-phone-square"> 1800-XXXX</i>
 		</div>
 
+		<%
+			Cart cart = (Cart) session.getAttribute("cart");
+			if (cart == null) {
+				cart = new Cart();
+				session.setAttribute("cart", cart);
+			}
+		%>
 		<div class="check_giohang">
-			<a href="KtraGioHang.html"><i class="fa fa-shopping-basket"></i>
-				0 GIỎ HÀNG</a>
+
+			<a href="KtraGioHang.jsp"><i class="fa fa-shopping-basket"></i> <%=cart.countItem()%>   GIỎ HÀNG</a>
 		</div>
 
 		<!-- form DangNhap DangKy -->
 		<div class="container">
 
 
-			<div class="modal fade" id="myModal">
 
-				<div class="modal-dialog modal-dialog-centered ">
-					<div class="modal-content">
-
-
-						<div class="modal-header">
-							<h4 class="modal-title">Đăng Nhập</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-						</div>
-
-
-						<div class="modal-body">
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-user"></i></span>
-								</div>
-								<input type="text" class="form-control"
-									placeholder="Tên đăng nhập" id="tenDN" name="username" required>
-
-
-							</div>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fa fa-lock"></i></span>
-								</div>
-								<input type="text" class="form-control" placeholder="Mật khẩu"
-									id="mk" name="password" required>
-
-							</div>
-						</div>
-
-
-						<div class="modal-footer">
-							<a href="#" data-toggle="modal" data-target="#myModalQuenMK"
-								data-dismiss="modal" id="quenMK" style="margin-right: 310px;">Quên
-								mật khẩu</a>
-							<button type="button" class="btn btn-secondary"
-								onclick="validateFormDNhap()">
-								<i class="fa fa-arrow-right"></i>
-							</button>
-						</div>
-
-					</div>
-				</div>
-
-
-			</div>
 
 			<div class="modal fade" id="myModal1">
 				<div class="modal-dialog modal-dialog-centered">
@@ -284,13 +257,46 @@
 
 		<!-- danh mục Gà -->
 
+		<%-- <%
+			Cart cart = (Cart) session.getAttribute("cart");
+			if (cart == null) {
+				cart = new Cart();
+				session.setAttribute("cart", cart);
+			}
+		%> --%>
 		<div class="container">
-			<a href="/FastFood/ThucDon">testThucDon</a>
+			
 			<section class="showFood">
+				<h3>MÓN NGON</h3>
+				<form method="post" class="form-inline" action="/FastFood/ThucDon">
 
-				<h3>GÀ RÁN + GÀ QUAY</h3>
-				<div class="input-group mb-3 searchbox">
-					<form method="post" class="form-inline" action="/FastFood/ThucDon">
+
+
+					<div class="input-group mb-3"
+						style="margin-left: 200px; font-size: 20px;">
+						<select class="form_input" onchange="this.form.submit()"
+							name="selectLoaiSP" id="selectLoaiSP">
+							<c:forEach var="loaiSP" items="${listLoaiSP}">
+								<option value="${loaiSP.getMaLoai()}">
+									<c:out value="${loaiSP.getTenLoaiSP()}" /></option>
+							</c:forEach>
+							<option value="*" selected="selected">default</option>
+						</select>
+
+						<script type="text/javascript">
+							document.getElementById("selectLoaiSP").value = "${selectLoaiSP}";
+						</script>
+						<select class="form_input" onchange="this.form.submit()"
+							name="sort" id="sort">
+							<option value="AZ">A-Z</option>
+							<option value="ZA">Z-A</option>
+						</select>
+						<script type="text/javascript">
+							document.getElementById("sort").value = "${sort}";
+						</script>
+					</div>
+					<div class="input-group mb-3 searchbox" style="margin-left: 40px;">
+
 						<input type="text" class="form-control" placeholder="Tìm kiếm"
 							name="search" id="search" value="${search }">
 						<div class="input-group-append">
@@ -298,8 +304,11 @@
 								<i class="fa fa-search"></i>
 							</button>
 						</div>
-					</form>					
-				</div>
+
+					</div>
+
+
+				</form>
 
 				<div class="row">
 					<c:forEach var="SP" items="${listSP}">
@@ -342,28 +351,22 @@
 										</c:otherwise>
 									</c:choose>
 
-									<%-- <div style="text-decoration: line-through; text-align: left;">
-										Giá cũ:
-										<c:set var="giaCu" value="${SP.getGiaBanDau()}" />
-										<fmt:formatNumber type="number" value="${giaCu}" />
-										VNĐ
-									</div>
-									<div style="text-align: left;">
-										Giá khuyến mãi:
-										<c:set var="giaBan" value="${SP.getGiaBan()}" />
-										<fmt:formatNumber type="number" value="${gia}" />
-										VNĐ
-									</div> --%>
+
 									<p></p>
 									<div>
-										<a href="/FastFood/GioHangServlet?maSP=<c:out value="${SP.getMaSP()}" />" class="btn btn-primary">ĐẶT MUA</a>
-										
+										<a
+											href="/FastFood/CartServlet?command=plus&maSP=
+											<c:out value="${SP.getMaSP()}" />"
+											class="btn btn-primary">ĐẶT MUA</a>
+
 									</div>
 								</div>
 							</div>
 						</div>
 
 					</c:forEach>
+
+
 				</div>
 
 				<!-- <div class="row">

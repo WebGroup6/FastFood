@@ -72,9 +72,9 @@
 						<li class="nav-item"><a class="nav-link"
 							href="/FastFood/ThucDon">Thực đơn </a></li>
 
-						
-						<li class="nav-item"><a class="nav-link" href="/FastFood/TinKMServlet/showKM">Khuyến
-								mãi </a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="/FastFood/TinKMServlet/showKM">Khuyến mãi </a></li>
 						<li class="nav-item"><a class="nav-link" href="TinTuc.jsp">Tin
 								tức </a></li>
 					</ul>
@@ -124,7 +124,7 @@
 		<div class="check_giohang">
 
 			<a href="KtraGioHang.jsp"><i class="fa fa-shopping-basket"></i> <%=cart.countItem()%>
-			</a>
+				GIỎ HÀNG </a>
 		</div>
 
 		<!-- form DangNhap DangKy -->
@@ -362,9 +362,10 @@
 								<tr>
 									<td><%=list.getValue().getProduct().getTenSP()%></td>
 									<td><%=list.getValue().getProduct().getGiaBan()%></td>
-									
+
 									<td><input type="number" name="SL-SPdcchon" min="1"
-										max="50" style="width: 50px; margin-left: 10px;" value="<%=list.getValue().getQuantity()%>"></td>
+										max="50" style="width: 50px; margin-left: 10px;"
+										value="<%=list.getValue().getQuantity()%>"></td>
 									<%-- <td><%=list.getValue().getQuantity()%></td> --%>
 									<%-- <td><%=list.getValue().getProduct().getGiaBan()*list.getValue().getQuantity() %></td> --%>
 
@@ -396,8 +397,7 @@
 
 					</div>
 					<span class="tongThanhtoan">
-						<!-- <h5>TỔNG THANH TOÁN</h5>
-						<h4>50.000đ</h4> -->
+
 
 						<ul class="nav nav-tabs nav-justified bg-success" id="myTab"
 							role="tablist" style="margin-top: 30px;">
@@ -405,15 +405,17 @@
 								data-toggle="tab" href="#content-thongtin" role="tab"
 								aria-controls="content-thongtin" onclick="nexttabThongtin()"
 								style="color: white; font-size: 18px;"> Đặt hàng </a></li>
-						</ul> 
+						</ul>
 
-					</span> 
+
+					</span>
 				</div>
 
 				<!-- tab thông tin khách cần giao -->
 				<div class="tab-pane fade" id="content-thongtin" role="tabpanel"
 					aria-labelledby="tab-thongtin">
 					<div class="hienthithongtin">
+
 
 						<table>
 							<tr>
@@ -425,7 +427,7 @@
 								<td><b>Địa chỉ :</b></td>
 								<td><input type="text" id="diachiKH" placeholder="123"></td>
 							</tr>
-							
+
 							<tr>
 								<td><b>SĐT :</b></td>
 								<td><input type="text" id="sdtKH" placeholder="0123456789"></td>
@@ -446,12 +448,14 @@
 				</div>
 
 				<!-- tab xác nhận đơn hàng -->
+
 				<div class="tab-pane fade" id="content-xacnhan" role="tabpanel"
 					aria-labelledby="tab-xacnhan">
+
 					<div class="xacnhan">
-						<h5 style="color: red;">Vui lòng xem lại thông tin đặt hàng
+						<!-- <h5 style="color: red;">Vui lòng xem lại thông tin đặt hàng
 							của quý khách</h5>
-						<!-- <button type="button" class="btn btn-outline-dark" style="margin-left: 500px; margin-bottom: -60px;"><i class="fa fa-pencil"></i>    Sửa thông tin</button> -->
+						<button type="button" class="btn btn-outline-dark" style="margin-left: 500px; margin-bottom: -60px;"><i class="fa fa-pencil"></i>    Sửa thông tin</button>
 
 						<table style="border: gray solid 2px; margin-left: 150px;">
 
@@ -474,7 +478,7 @@
 								<td><input type="text" id="sdtKH" placeholder="0123456789"></td>
 							</tr>
 						</table>
-
+ -->
 
 						<table class="table table-striped">
 							<thead class="thead-dark">
@@ -482,7 +486,7 @@
 									<th>Thông tin sản phẩm</th>
 									<th>Đơn giá</th>
 									<th>Số lượng</th>
-						
+
 									<th>Xử lý</th>
 								</tr>
 							</thead>
@@ -493,9 +497,10 @@
 								<tr>
 									<td><%=list.getValue().getProduct().getTenSP()%></td>
 									<td><%=list.getValue().getProduct().getGiaBan()%></td>
-									
+
 									<td><input type="number" name="SL-SPdcchon" min="1"
-										max="50" style="width: 50px; margin-left: 10px;" value="<%=list.getValue().getQuantity()%>"></td>
+										max="50" style="width: 50px; margin-left: 10px;"
+										value="<%=list.getValue().getQuantity()%>"></td>
 									<%-- <td><%=list.getValue().getQuantity()%></td> --%>
 									<%-- <td><%=list.getValue().getProduct().getGiaBan()*list.getValue().getQuantity() %></td> --%>
 
@@ -515,6 +520,9 @@
 										href="/FastFood/CartServlet?command=remove&maSP=<%=list.getValue().getProduct().getMaSP()%>"><i
 											class="fa fa-trash"></i></a></td>
 								</tr>
+
+
+
 								<%
 									}
 								%>
@@ -524,24 +532,32 @@
 
 							</tbody>
 						</table>
-						<span class="tongThanhtoan">
-							<h5>TỔNG THANH TOÁN</h5>
-							<h4>50.000đ</h4>
+						<form action="/FastFood/CheckOutServlet" method="post">
+							<!-- <div>
+								<span> MaKH </span> <input type="text" name="maKH">
+							</div> -->
+							<span class="tongThanhtoan">
+								<h5>TỔNG THANH TOÁN</h5>
+								<h4><%=cart.totalCart()%></h4> <!-- <button class="btn btn-success" type="submit"
+									onclick="dathangSuccess()">Đồng ý đặt hàng</button> -->
+								<button class="btn btn-success" type="submit">Đồng ý
+									đặt hàng</button>
+							</span>
+							<!-- <button class="btn btn-success" type="submit">Đồng ý
+									đặt hàng</button> -->
+							<span>
+								<h5 style="color: tomato;">Hình thức: Thanh toán khi nhận
+									hàng</h5>
+								<button class="btn btn-danger" type=""
+									style="margin: 35px 70px;" onclick="huyDathang() ">Hủy
+									bỏ đơn hàng</button>
+							</span>
 
-							<button class="btn btn-success" type="submit"
-								onclick="dathangSuccess()">Đồng ý đặt hàng</button> <!-- <a href="KtraGioHang.html" class="btn btn-warning" type="submit">Đồng ý đặt hàng</a> -->
-						</span> <span>
-							<h5 style="color: tomato;">Hình thức: Thanh toán khi nhận
-								hàng</h5>
-							<button class="btn btn-danger" type="submit"
-								style="margin: 35px 70px;" onclick="huyDathang() ">Hủy
-								bỏ đơn hàng</button>
-						</span>
-
-
+						</form>
 
 					</div>
 				</div>
+
 
 			</div>
 		</div>
@@ -605,7 +621,7 @@
 		integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
 		crossorigin="anonymous"></script>
 
-	<script src="js/jquery.min.js"></script>
+	<script src="JS/jquery.min.js"></script>
 	<script type="text/javascript" src="JS/dki-dnhap.js"></script>
 	<script type="text/javascript" src="JS/main.js"></script>
 
