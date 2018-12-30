@@ -542,9 +542,9 @@
 								<h4><%=cart.totalCart()%></h4> <!-- <button class="btn btn-success" type="submit"
 									onclick="dathangSuccess()">Đồng ý đặt hàng</button> -->
 								
-								<input type="hidden" class="form_input" name="txtMaHD"
+								<%-- <input type="hidden" class="form_input" name="txtMaHD"
 													required="required" readonly="readonly"
-													value="${maHDNew}" />
+													value="${maHDNew}" /> --%>
 								<button class="btn btn-success" type="submit">Đồng ý
 									đặt hàng</button>
 							</span>

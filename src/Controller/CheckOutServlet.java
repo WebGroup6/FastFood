@@ -47,7 +47,9 @@ public class CheckOutServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session=request.getSession();
-		Date date=new Date();
+//		Date date=new Date();
+	    java.util.Date utilDate = new java.util.Date();
+	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		
 		String maHDNew = "";
 
@@ -55,18 +57,18 @@ public class CheckOutServlet extends HttpServlet {
 		try {
 			HoaDon hd=new HoaDon();
 			maHDNew=hdDAO.maxMaHD();
-			hd.setMaHD(maHDNew);
-
-			hd.setNgayLap(date);
+			hd.setMaHD(maHDNew);		
+		    
+			hd.setNgayLap(sqlDate);
 			hd.setTongTien(cart.totalCart());
 			hdDAO.insertHD(hd);
-			int thanhtien=0;
+			int thanhtien=0; 
 			for(Map.Entry<String, Item> list:cart.getCartItems().entrySet())
 			{
 				thanhtien=list.getValue().getQuantity()*list.getValue().getProduct().getGiaBan();
 				cthdDAO.insertCTHD(new ChiTietHoaDon(maHDNew,list.getValue().getProduct().getMaSP(),list.getValue().getQuantity(),list.getValue().getProduct().getGiaBan(),thanhtien));
 			}
-			hdDAO.insertHD(hd);
+			//hdDAO.insertHD(hd);
 			cart =new Cart();
 			session.setAttribute("cart", cart);
 			

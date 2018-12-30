@@ -1,6 +1,6 @@
 package DAO;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -62,7 +62,7 @@ public class HoaDonDAO {
            
             
             int tongTien=resultSet.getInt("tongTien");
-            Date ngayLap=resultSet.getDate("ngaylap");
+            java.sql.Date ngayLap=resultSet.getDate("ngaylap");
             int trangThai=resultSet.getInt("trangthai");
            
             HoaDon hd = new HoaDon(maHD,maKH,maNV,tongTien,ngayLap,trangThai);

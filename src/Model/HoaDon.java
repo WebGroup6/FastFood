@@ -1,13 +1,12 @@
 package Model;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
+
 
 public class HoaDon {
 	private String maHD;
 	private String maKH;
 	private String maNV;
 	private int tongTien;
-	private Date ngayLap;
+	private java.sql.Date ngayLap;
 	private int trangThai;
 	public String getMaHD() {
 		return maHD;
@@ -33,10 +32,10 @@ public class HoaDon {
 	public void setTongTien(int tongTien) {
 		this.tongTien = tongTien;
 	}
-	public Date getNgayLap() {
+	public java.sql.Date getNgayLap() {
 		return ngayLap;
 	}
-	public void setNgayLap(Date ngayLap) {
+	public void setNgayLap(java.sql.Date ngayLap) {
 		this.ngayLap = ngayLap;
 	}
 	public int getTrangThai() {
@@ -48,7 +47,7 @@ public class HoaDon {
 	public HoaDon() {
 		super();
 	}
-	public HoaDon(String maHD, String maKH, String maNV, int tongTien, Date ngayLap, int trangThai) {
+	public HoaDon(String maHD, String maKH, String maNV, int tongTien, java.sql.Date ngayLap, int trangThai) {
 		super();
 		this.maHD = maHD;
 		this.maKH = maKH;
