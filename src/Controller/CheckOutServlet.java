@@ -48,10 +48,14 @@ public class CheckOutServlet extends HttpServlet {
 
 		HttpSession session=request.getSession();
 		Date date=new Date();
+		
+		String maHDNew = "";
+
 		Cart cart=(Cart) session.getAttribute("cart");
 		try {
 			HoaDon hd=new HoaDon();
-			hd.setMaHD("HD012");
+			maHDNew=hdDAO.maxMaHD();
+			hd.setMaHD(maHDNew);
 
 			hd.setNgayLap(date);
 			hd.setTongTien(cart.totalCart());
@@ -60,7 +64,7 @@ public class CheckOutServlet extends HttpServlet {
 			for(Map.Entry<String, Item> list:cart.getCartItems().entrySet())
 			{
 				thanhtien=list.getValue().getQuantity()*list.getValue().getProduct().getGiaBan();
-				cthdDAO.insertCTHD(new ChiTietHoaDon("HD012",list.getValue().getProduct().getMaSP(),list.getValue().getQuantity(),list.getValue().getProduct().getGiaBan(),thanhtien));
+				cthdDAO.insertCTHD(new ChiTietHoaDon(maHDNew,list.getValue().getProduct().getMaSP(),list.getValue().getQuantity(),list.getValue().getProduct().getGiaBan(),thanhtien));
 			}
 			hdDAO.insertHD(hd);
 			cart =new Cart();

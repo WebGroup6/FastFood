@@ -171,4 +171,38 @@ public class HoaDonDAO {
          
         return hd;
     }
+    
+    public String maxMaHD() {
+		String ma = "";
+		try {
+			connect();
+			String sqlExec = "EXEC HD_LayMaHDCaoI";
+
+			PreparedStatement statement = jdbcConnection.prepareStatement(sqlExec);
+
+			statement.setEscapeProcessing(true);
+			statement.setQueryTimeout(15);
+
+			ResultSet res = statement.executeQuery();
+
+			res.next();
+			String temp = res.getString(1);
+
+			temp = temp.substring(2, temp.length());
+			int so = Integer.parseInt(temp) + 1;
+			temp = Integer.toString(so);
+			if (temp.length() == 1)
+				ma = "HD00" + temp;
+			else if (temp.length() == 2)
+				ma = "HD0" + temp;
+			else
+				ma = "HD" + temp;
+
+			disconnect();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return ma;
+	}
 }
