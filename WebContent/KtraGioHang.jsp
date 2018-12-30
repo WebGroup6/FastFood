@@ -532,10 +532,11 @@
 
 							</tbody>
 						</table>
-						<form action="/FastFood/CheckOutServlet" method="post">
-							<!-- <div>
+
+						<!-- <div>
 								<span> MaKH </span> <input type="text" name="maKH">
 							</div> -->
+						<form action="/FastFood/CheckOutServlet" method="post">
 							<span class="tongThanhtoan">
 								<h5>TỔNG THANH TOÁN</h5>
 								<h4><%=cart.totalCart()%></h4> <!-- <button class="btn btn-success" type="submit"
@@ -543,17 +544,17 @@
 								<button class="btn btn-success" type="submit">Đồng ý
 									đặt hàng</button>
 							</span>
-							<!-- <button class="btn btn-success" type="submit">Đồng ý
-									đặt hàng</button> -->
-							<span>
-								<h5 style="color: tomato;">Hình thức: Thanh toán khi nhận
-									hàng</h5>
-								<button class="btn btn-danger" type=""
-									style="margin: 35px 70px;" onclick="huyDathang() ">Hủy
-									bỏ đơn hàng</button>
-							</span>
-
 						</form>
+						<!-- <button class="btn btn-success" type="submit">Đồng ý
+									đặt hàng</button> -->
+						<span>
+							<h5 style="color: tomato;">Hình thức: Thanh toán khi nhận
+								hàng</h5>
+							<button class="btn btn-danger" type="button" style="margin: 35px 70px;"
+								onclick="huyDathang() ">Hủy bỏ đơn hàng</button>
+						</span>
+
+
 
 					</div>
 				</div>
